@@ -9,7 +9,7 @@ import {
 import { LucideIcon } from "lucide-react-native";
 import { useTheme } from "../theme/useTheme";
 
-type ButtonType = "primary" | "secondary" | "outline";
+type ButtonType = "primary" | "secondary" | "outline" | "success" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -41,15 +41,15 @@ export function Button({
 }: ButtonProps) {
   const { colors } = useTheme();
 
-  // palette in base al tipo + modalità (light/dark)
+  // palette dinamica basata sul tipo e sul tema
   const palette = colors[type];
 
-  // override colori se specificati
-  const finalBg = bgColor || palette.bg;
-  const finalText = textColor || palette.text;
-  const finalBorder = borderColor || palette.border;
+  // override manuali
+  const finalBg = bgColor || palette?.bg;
+  const finalText = textColor || palette?.text;
+  const finalBorder = borderColor || palette?.border;
 
-  // spacing + dimensioni
+  // dimensioni
   const sizeMap = {
     sm: { pv: 8, ph: 14, br: 8, fs: 14, is: 16 },
     md: { pv: 14, ph: 20, br: 10, fs: 16, is: 20 },

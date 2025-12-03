@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, ViewProps } from "react-native";
-import { useTheme } from "../theme/useTheme";
+import { useTheme } from "../../theme/useTheme";
 
 interface QuoteProps extends ViewProps {
   children: React.ReactNode;

@@ -1,10 +1,12 @@
 {
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "declaration": true,
     "esModuleInterop": true,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TextProps } from "react-native";
-import { useTheme } from "../theme/useTheme";
+import { useTheme } from "../../theme/useTheme";
 
 export interface SmallProps extends TextProps {
   children: React.ReactNode;

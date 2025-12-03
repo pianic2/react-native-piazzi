@@ -1,6 +1,6 @@
 import React from "react";
-import { SafeAreaView, ViewProps, StyleSheet } from "react-native";
-import { useTheme } from "../theme/useTheme";
+import { ScrollView, ViewProps, StyleSheet } from "react-native";
+import { useTheme } from "../../theme/useTheme";
 
 interface ScreenProps extends ViewProps {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ export function Screen({ children, padding = 20, style, ...rest }: ScreenProps) 
   const { colors } = useTheme();
 
   return (
-    <SafeAreaView
+    <ScrollView
       {...rest}
       style={[
         styles.container,
@@ -24,7 +24,7 @@ export function Screen({ children, padding = 20, style, ...rest }: ScreenProps) 
       ]}
     >
       {children}
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

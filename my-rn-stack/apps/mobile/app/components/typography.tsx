@@ -15,29 +15,58 @@ import {
 export default function TypographyDoc() {
   return (
     <ScrollView style={{ flex: 1, padding: 20 }}>
-      {/* TITLE */}
+
       <Heading level={1}>Tipografia</Heading>
       <P>
-        La tipografia fornisce gli elementi fondamentali per strutturare e
-        organizzare il contenuto testuale dell’app. Ogni componente è
-        progettato per essere coerente con il tema, leggibile e facilmente
-        combinabile con gli altri elementi dell’interfaccia.
+        Questa sezione include tutti i componenti usati per gestire e
+        strutturare il testo all’interno della UI. Ogni componente è
+        tematizzato, accessibile e progettato per migliorare leggibilità e
+        coerenza del design.
       </P>
 
       <Divider style={{ marginVertical: 20 }} />
 
-      {/* HEADINGS */}
+      {/* ========================================================= */}
+      {/* HEADING */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 10 }}>
         <Heading level={3}>Heading</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>Heading</B> definisce la gerarchia visiva dei titoli
-          da livello 1 a livello 5. Ogni livello ha dimensioni, peso e spaziatura
-          propri per evidenziare la struttura del contenuto.
+          Il componente <B>Heading</B> definisce titoli gerarchici da 1 a 5.
+          Ogni livello ha dimensioni e peso differenti, utili per costruire
+          una struttura visiva chiara ed efficace.
         </P>
 
-        <TextGroup spacing={12} style={{ marginTop: 16 }}>
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`level: 1 | 2 | 3 | 4 | 5
+  Livello del titolo.
+
+style: TextStyle
+  Stili aggiuntivi del testo.
+
+children: ReactNode
+  Contenuto del titolo.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+        <Code>
+{`<TextGroup spacing={10}>
+  <Heading level={1}>Heading 1</Heading>
+  <Heading level={2}>Heading 2</Heading>
+  <Heading level={3}>Heading 3</Heading>
+  <Heading level={4}>Heading 4</Heading>
+  <Heading level={5}>Heading 5</Heading>
+</TextGroup>`}
+        </Code>
+
+        <TextGroup spacing={10} style={{ marginTop: 10 }}>
           <Heading level={1}>Heading 1</Heading>
           <Heading level={2}>Heading 2</Heading>
           <Heading level={3}>Heading 3</Heading>
@@ -46,120 +75,253 @@ export default function TypographyDoc() {
         </TextGroup>
       </Card>
 
-      {/* PARAGRAPH */}
+      {/* ========================================================= */}
+      {/* PARAGRAFO P */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>P – Paragrafo</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>P</B> rappresenta il paragrafo principale. Mantiene
-          leggibilità elevata grazie a <B>fontSize 16</B>, <B>lineHeight 22</B> e
-          colore derivato dal tema. È l'elemento base per contenuti testuali.
+          Il componente <B>P</B> è il paragrafo principale. Utilizza dimensioni
+          e interlinea ottimizzate per la lettura continua e applica
+          automaticamente il colore del tema.
         </P>
 
-        <P>
-          Questo è un esempio di paragrafo formattato automaticamente secondo le
-          regole tipografiche della libreria.
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`style: TextStyle
+  Override degli stili del testo.
+
+children: ReactNode
+  Contenuto del paragrafo.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+        <Code>
+{`<P>
+  Questo è un esempio di paragrafo
+  reso con il componente P.
+</P>`}
+        </Code>
+
+        <P style={{ marginTop: 10 }}>
+          Questo è un esempio di paragrafo reso con il componente P.
         </P>
       </Card>
 
+      {/* ========================================================= */}
       {/* SMALL */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>Small – Testo secondario</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>Small</B> viene utilizzato per note, descrizioni,
-          didascalie e contenuti meno importanti. Ha dimensione ridotta e
-          opacità lievemente inferiore.
+          <B>Small</B> è usato per note, didascalie e contenuti a bassa
+          priorità. Ha dimensioni ridotte e opacità inferiore rispetto a P.
         </P>
 
-        <Small>Questo è un testo secondario.</Small>
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`style: TextStyle
+  Override degli stili.
+
+children: ReactNode
+  Contenuto del testo secondario.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+        <Code>
+{`<Small>Questo è un testo secondario.</Small>`}
+        </Code>
+
+        <Small style={{ marginTop: 10 }}>Questo è un testo secondario.</Small>
       </Card>
 
-      {/* BOLD */}
+      {/* ========================================================= */}
+      {/* B – BOLD INLINE */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>B – Bold inline</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>B</B> consente di enfatizzare un frammento di testo
-          all’interno di un paragrafo senza interrompere il flusso testuale.
+          Il componente <B>B</B> evidenzia una parte di testo mantenendo il
+          comportamento inline. È perfetto per parole chiave o enfasi semantica.
         </P>
 
-        <P>
-          Esempio: puoi scrivere <B>testo in grassetto</B> all’interno del
-          paragrafo senza modificare lo stile generale.
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`style: TextStyle
+  Override degli stili.
+
+children: ReactNode
+  Testo in grassetto.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+        <Code>
+{`<P>
+  Questo è un paragrafo con una parte in <B>grassetto</B>.
+</P>`}
+        </Code>
+
+        <P style={{ marginTop: 10 }}>
+          Questo è un paragrafo con una parte in <B>grassetto</B>.
         </P>
       </Card>
 
-      {/* CODE INLINE */}
+      {/* ========================================================= */}
+      {/* CODEINLINE */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>CodeInline – Codice inline</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          <B>CodeInline</B> viene usato per evidenziare frammenti di codice
-          direttamente dentro il testo, ad esempio{" "}
-          <CodeInline>colors.text</CodeInline>.
+          <B>CodeInline</B> evidenzia frammenti di codice all’interno del testo,
+          come variabili o proprietà, mantenendo un flusso naturale.
         </P>
 
-        <P>
-          Il componente utilizza stile monospace, background dedicato e padding
-          compatto per essere leggibile senza interrompere il flusso.
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`style: TextStyle
+  Override degli stili inline.
+
+children: ReactNode
+  Codice inline.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+        <Code>
+{`<P>
+  Il valore deriva da <CodeInline>colors.text</CodeInline>.
+</P>`}
+        </Code>
+
+        <P style={{ marginTop: 10 }}>
+          Il valore deriva da <CodeInline>colors.text</CodeInline>.
         </P>
       </Card>
 
-      {/* CODE BLOCK */}
+      {/* ========================================================= */}
+      {/* CODE – BLOCCO */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>Code – Blocco di codice</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>Code</B> permette di mostrare blocchi di codice
-          tematizzati. Supporta testo multilinea e lo stile monospace.
+          <B>Code</B> mostra blocchi di codice multilinea con font monospace,
+          padding e background tematizzato.
         </P>
 
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
         <Code>
+{`style: ViewStyle
+  Stili del contenitore.
+
+textStyle: TextStyle
+  Override degli stili del testo.
+
+children: string | ReactNode
+  Codice da visualizzare.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+        <Code style={{ marginTop: 10 }}>
 {`const palette = colors[type];
 const finalBg = bgColor || palette.bg;`}
         </Code>
       </Card>
 
+      {/* ========================================================= */}
       {/* QUOTE */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>Quote – Citazione</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          <B>Quote</B> formatta un blocco citazione con bordo laterale e testo
-          in stile narrativo, ideale per evidenziare concetti chiave o porzioni 
-          discorsive.
+          <B>Quote</B> formatta un blocco citazione con bordo laterale e
+          stile narrativo, ideale per evidenziare concetti chiave.
         </P>
 
-        <Quote>
-          La buona tipografia migliora la leggibilità, la struttura e la
-          comprensione del contenuto.
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`style: ViewStyle
+  Stili aggiuntivi.
+
+children: ReactNode
+  Testo della citazione.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+        <Code>
+{`<Quote>
+  La buona tipografia migliora la comprensione.
+</Quote>`}
+        </Code>
+
+        <Quote style={{ marginTop: 10 }}>
+          La buona tipografia migliora la comprensione.
         </Quote>
       </Card>
 
+      {/* ========================================================= */}
       {/* TEXTGROUP */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
-        <Heading level={3}>TextGroup – Gestione automatica dello spacing</Heading>
+        <Heading level={3}>TextGroup – Gestione dello spacing</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>TextGroup</B> gestisce automaticamente lo spazio
-          verticale tra più elementi tipografici. È ideale quando si vuole 
-          mantenere uno spacing coerente senza aggiungere margini manuali.
+          <B>TextGroup</B> applica automaticamente una spaziatura verticale
+          coerente tra più elementi tipografici.
         </P>
 
-        <TextGroup spacing={12} style={{ marginTop: 16 }}>
-          <P>Questo è il primo paragrafo.</P>
-          <P>Questo è il secondo paragrafo, con spacing automatico.</P>
-          <Small>Questo è un testo secondario.</Small>
-        </TextGroup>
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`spacing: number
+  Distanza verticale tra gli elementi.
 
+style: ViewStyle
+  Stili aggiuntivi.
+
+children: ReactNode[]
+  Elementi da impaginare.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
         <Code>
 {`<TextGroup spacing={12}>
   <P>Primo paragrafo.</P>
@@ -167,6 +329,12 @@ const finalBg = bgColor || palette.bg;`}
   <Small>Nota secondaria.</Small>
 </TextGroup>`}
         </Code>
+
+        <TextGroup spacing={12} style={{ marginTop: 10 }}>
+          <P>Primo paragrafo.</P>
+          <P>Secondo paragrafo.</P>
+          <Small>Nota secondaria.</Small>
+        </TextGroup>
       </Card>
 
       <View style={{ height: 40 }} />

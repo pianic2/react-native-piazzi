@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, TextStyle } from "react-native";
-import { useTheme } from "../theme/useTheme";
+import { useTheme } from "../../theme/useTheme";
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5;
 

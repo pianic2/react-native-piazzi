@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import {
   Heading,
   Card,
@@ -19,142 +19,223 @@ export default function LayoutDoc() {
   return (
     <ScrollView style={{ flex: 1, padding: 20 }}>
 
-      {/* TITLE */}
       <Heading level={1}>Layout</Heading>
       <P>
-        I componenti di layout permettono di strutturare la pagina in modo
-        coerente, leggibile e scalabile. Offrono utilità flessibili per
-        disporre elementi in riga, colonna, suddividere sezioni, gestire 
-        spaziature e creare schermate consistenti con il tema.
+        I componenti di layout servono a organizzare visivamente contenuti,
+        spaziature e sezioni di una schermata. Ogni componente è progettato
+        per essere flessibile, responsive e coerente con il design system.
       </P>
 
       <Divider style={{ marginVertical: 20 }} />
 
+      {/* ========================================================= */}
       {/* ROW */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 10 }}>
         <Heading level={3}>Row</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>Row</B> permette di disporre gli elementi
-          <B> orizzontalmente</B>. Supporta:
+          Il componente <B>Row</B> dispone i contenuti in <B>orizzontale</B>.
+          È utile per creare strutture su riga, pulsanti affiancati,
+          suddivisioni e layout flessibili.
         </P>
 
-        <Column gap={6} style={{ marginTop: 10 }}>
-          <P><B>gap</B> – distanza tra gli elementi</P>
-          <P><B>align</B> – allineamento verticale</P>
-          <P><B>justify</B> – allineamento orizzontale</P>
-        </Column>
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`gap?: number
+  Spaziatura orizzontale tra i figli.
 
-        <P style={{ marginTop: 10 }}>Esempio:</P>
+align?: "flex-start" | "center" | "flex-end" | "stretch"
+  Allineamento verticale degli elementi.
 
-        <Row gap={10} style={{ marginTop: 10 }}>
+justify?: "flex-start" | "center" | "flex-end" | "space-between"
+  Allineamento orizzontale.
+
+style?: ViewStyle
+  Stili extra per il contenitore.
+
+children: ReactNode
+  Elementi da disporre in fila.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+
+        <Code>
+{`<Row gap={10} align="center">
+  <Section><P>Elemento A</P></Section>
+  <Section><P>Elemento B</P></Section>
+  <Section><P>Elemento C</P></Section>
+</Row>`}
+        </Code>
+
+        <Row gap={10} align="center" style={{ marginTop: 12 }}>
           <Section><P>Elemento A</P></Section>
           <Section><P>Elemento B</P></Section>
           <Section><P>Elemento C</P></Section>
         </Row>
-
-        <Code>
-{`<Row gap={10} align="center" justify="flex-start">
-  <Section>...</Section>
-  <Section>...</Section>
-</Row>`}
-        </Code>
       </Card>
 
+      {/* ========================================================= */}
       {/* COLUMN */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>Column</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>Column</B> dispone gli elementi 
-          <B> verticalmente</B> con un <B>gap automatico</B> tra ciascun figlio.
-          Ideale per moduli, stack di componenti o testi.
+          <B>Column</B> dispone i contenuti in <B>verticale</B> con
+          spaziatura automatica. È ideale per moduli, stack di UI o
+          blocchi testuali.
         </P>
 
-        <Column gap={12} style={{ marginTop: 10 }}>
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`gap?: number
+  Spaziatura verticale tra gli elementi.
+
+style?: ViewStyle
+  Stili aggiuntivi del contenitore.
+
+children: ReactNode
+  Elementi impilati verticalmente.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
+
+        <Code>
+{`<Column gap={12}>
+  <Section><P>Elemento 1</P></Section>
+  <Section><P>Elemento 2</P></Section>
+  <Section><P>Elemento 3</P></Section>
+</Column>`}
+        </Code>
+
+        <Column gap={12} style={{ marginTop: 12 }}>
           <Section><P>Elemento 1</P></Section>
           <Section><P>Elemento 2</P></Section>
           <Section><P>Elemento 3</P></Section>
         </Column>
-
-        <Code>
-{`<Column gap={12}>
-  <Section>Elemento 1</Section>
-  <Section>Elemento 2</Section>
-</Column>`}
-        </Code>
       </Card>
 
+      {/* ========================================================= */}
       {/* SPACER */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>Spacer</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>Spacer</B> crea uno spazio vuoto 
-          <B>verticale o orizzontale</B>. Perfetto per separare blocchi di UI.
+          <B>Spacer</B> crea spazio vuoto verticale o orizzontale.
+          È perfetto per separare sezioni e controllare la pausa visiva.
         </P>
 
-        <P>
-          <B>size</B> controlla la dimensione dello spazio,  
-          <B>horizontal</B> decide se applicarlo come larghezza invece che altezza.
-        </P>
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`size: number
+  Dimensione dello spazio in px.
 
-        <Column gap={0} style={{ marginTop: 10 }}>
-          <P>Testo sopra</P>
-          <Spacer size={20} />
-          <P>Testo sotto</P>
-        </Column>
+horizontal?: boolean
+  Se true, applica larghezza invece che altezza.
+
+style?: ViewStyle
+  Override degli stili.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
 
         <Code>
-{`<Spacer size={20} />
-<Spacer size={12} horizontal />`}
+{`<P>Testo sopra</P>
+<Spacer size={20} />
+<P>Testo sotto</P>`}
         </Code>
+
+        <P style={{ marginTop: 12 }}>Testo sopra</P>
+        <Spacer size={20} />
+        <P>Testo sotto</P>
       </Card>
 
+      {/* ========================================================= */}
       {/* SECTION */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>Section</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>Section</B> rappresenta un contenitore con 
-          <B>padding standard</B> e <B>background tematizzato</B>.  
-          È usato per suddividere logicamente una pagina.
+          <B>Section</B> è un contenitore strutturale con padding coerente,
+          superfici tematizzate e bordi arrotondati. Perfetto per organizzare
+          blocchi logici di contenuto.
         </P>
 
-        <Section style={{ marginTop: 10 }}>
-          <P>Questa è una sezione con padding automatico e bordo arrotondato.</P>
-        </Section>
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`padding?: number
+  Padding interno della sezione.
+
+style?: ViewStyle
+  Override degli stili del contenitore.
+
+children: ReactNode
+  Contenuto della sezione.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
 
         <Code>
-{`<Section padding={20}>
+{`<Section>
   <P>Contenuto della sezione</P>
 </Section>`}
         </Code>
+
+        <Section style={{ marginTop: 12 }}>
+          <P>Contenuto della sezione</P>
+        </Section>
       </Card>
 
+      {/* ========================================================= */}
       {/* SCREEN */}
+      {/* ========================================================= */}
+
       <Card style={{ marginTop: 20 }}>
         <Heading level={3}>Screen</Heading>
         <Divider />
 
+        {/* DESCRIZIONE */}
         <P>
-          Il componente <B>Screen</B> è il layout principale di una pagina:
+          <B>Screen</B> è il layout principale di pagina: integra SafeAreaView,
+          padding responsivo e background tematizzato. È la base di ogni
+          schermata dell’app.
         </P>
 
-        <Column gap={6} style={{ marginTop: 10 }}>
-          <P><B>SafeAreaView</B> integrato</P>
-          <P><B>padding automatico</B> responsivo</P>
-          <P><B>background</B> collegato al tema</P>
-          <P><B>flex: 1</B> per occupare tutto lo schermo</P>
-        </Column>
+        {/* PROPS */}
+        <Heading level={4} style={{ marginTop: 20 }}>Props</Heading>
+        <Code>
+{`style?: ViewStyle
+  Override degli stili di layout.
 
-        <Screen style={{ marginTop: 16 }}>
-          <P>Questa è una schermata base con SafeArea e padding integrato.</P>
-        </Screen>
+children: ReactNode
+  Contenuto della schermata.`}
+        </Code>
+
+        {/* ESEMPIO */}
+        <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
 
         <Code>
 {`<Screen>
@@ -162,9 +243,12 @@ export default function LayoutDoc() {
   <P>Contenuto della schermata</P>
 </Screen>`}
         </Code>
-      </Card>
 
-      <View style={{ height: 40 }} />
+        <Screen style={{ marginTop: 12, padding: 16 }}>
+          <Heading level={4}>Esempio Screen</Heading>
+          <P>Questa è una schermata base con SafeArea e padding integrato.</P>
+        </Screen>
+      </Card>
     </ScrollView>
   );
 }

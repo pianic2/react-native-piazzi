@@ -1,44 +1,51 @@
+// ThemeContext.tsx
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { COLOR_MAP, ThemeMode } from "./colors";
+import { extendTheme } from "./extendTheme";
+import { baseTheme } from "./colors.base";
 import { safeGetItem, safeSetItem } from "./safeStorage";
 
-export interface ThemeContextValue {
+export type ThemeMode = "light" | "dark";
+
+interface ThemeContextValue {
   mode: ThemeMode;
-  colors: typeof COLOR_MAP["light"]
+  colors: any;
+  setMode: (m: ThemeMode) => void;
   toggleTheme: () => void;
-  setTheme: (m: ThemeMode) => void;
 }
 
-const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({
+  children,
+  theme: overrides,
+}: {
+  children: React.ReactNode;
+  theme?: any;
+}) {
+  const mergedTheme = extendTheme(overrides);
   const [mode, setMode] = useState<ThemeMode>("light");
 
   useEffect(() => {
     (async () => {
-      const saved = await safeGetItem("theme-mode");
-      if (saved === "dark" || saved === "light") {
-        setMode(saved);
+      const stored = await safeGetItem("theme-mode");
+      if (stored === "dark" || stored === "light") {
+        setMode(stored);
       }
     })();
   }, []);
 
-  async function updateTheme(newMode: ThemeMode) {
-    setMode(newMode);
-    await safeSetItem("theme-mode", newMode);
-  }
-
-  function toggleTheme() {
-    updateTheme(mode === "light" ? "dark" : "light");
+  async function updateMode(next: ThemeMode) {
+    setMode(next);
+    await safeSetItem("theme-mode", next);
   }
 
   return (
     <ThemeContext.Provider
       value={{
         mode,
-        colors: COLOR_MAP[mode],
-        toggleTheme,
-        setTheme: updateTheme,
+        colors: mergedTheme[mode],
+        setMode: updateMode,
+        toggleTheme: () => updateMode(mode === "light" ? "dark" : "light"),
       }}
     >
       {children}
@@ -46,10 +53,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useThemeContext(): ThemeContextValue {
+export function useTheme() {
   const ctx = useContext(ThemeContext);
-  if (!ctx) {
-    throw new Error("useThemeContext must be inside ThemeProvider");
-  }
+  if (!ctx) throw new Error("useTheme must be used inside ThemeProvider");
   return ctx;
 }

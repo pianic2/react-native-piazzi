@@ -1,20 +1,35 @@
+// ThemedBackground.tsx
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { useThemeContext } from "./ThemeContext";
+import { View, StyleSheet, ViewStyle } from "react-native";
+import { useTheme } from "./ThemeContext";
 
-export function ThemedBackground({ children }: { children: React.ReactNode }) {
-  const { colors } = useThemeContext();
+interface Props {
+  children: React.ReactNode;
+  style?: ViewStyle | ViewStyle[];
+  noPadding?: boolean;
+}
+
+export function ThemedBackground({ children, style, noPadding }: Props) {
+  const { colors } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <View
+      style={[
+        {
+          flex: 1,
+          backgroundColor: colors.background,
+        },
+        !noPadding && styles.padding,
+        style,
+      ]}
+    >
       {children}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  padding: {
     padding: 20,
   },
 });

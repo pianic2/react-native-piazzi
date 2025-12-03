@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ViewStyle } from "react-native";
-import { useTheme } from "../theme/useTheme";
+import { useTheme } from "../../theme/useTheme";
 
 interface DividerProps {
   color?: string;       // override colore linea

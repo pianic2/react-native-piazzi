@@ -1,6 +1,6 @@
 import React from "react";
 import { View, ViewProps } from "react-native";
-import { useTheme } from "../theme/useTheme";
+import { useTheme } from "../../theme/useTheme";
 
 interface SectionProps extends ViewProps {
   children: React.ReactNode;

@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, TextProps } from "react-native";
-import { useTheme } from "../theme/useTheme";
+import { useTheme } from "../../theme/useTheme";
 
-export interface PProps extends TextProps {
+export interface BProps extends TextProps {
   children: React.ReactNode;
 }
 
-export function P({ children, style, ...rest }: PProps) {
+export function B({ children, style, ...rest }: BProps) {
   const { colors } = useTheme();
 
   return (
@@ -14,12 +14,10 @@ export function P({ children, style, ...rest }: PProps) {
       {...rest}
       style={[
         {
-          fontSize: 16,
-          lineHeight: 22,
+          fontWeight: "700",
           color: colors.text,
-          marginTop: 10,
         },
-        style,
+        style
       ]}
     >
       {children}
