@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.1.10",
+    "msw": "^2.12.3",
     "typescript": "~5.9.2"
   },
   "version": "1.0.0",

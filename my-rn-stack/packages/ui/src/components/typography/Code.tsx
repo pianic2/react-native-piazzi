@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 8,
     top: 8,
+    zIndex: 10,
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 6,

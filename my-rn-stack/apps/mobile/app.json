@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "mobile",
-    "slug": "mobile",
+    "slug": "stack",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -34,6 +34,12 @@
     "transpilePackages": [
       "ui",
       "auth"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "175ea927-57d8-44db-9e43-ee83eea64384"
+      }
+    },
+    "owner": "pianics-organization"
   }
 }

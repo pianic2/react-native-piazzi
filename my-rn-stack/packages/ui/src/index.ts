@@ -2,6 +2,8 @@
 // COMPONENTS
 // ===============================
 
+import { NavBar } from "./components/navigation/NavBar";
+
 // Base UI
 export { Button } from "./components/Button";
 export { Card } from "./components/Card";
@@ -35,6 +37,9 @@ export { RadioGroup } from "./components/form/RadioGroup";
 export { Select } from "./components/form/Select";
 export { FormField } from "./components/form/FormField";
 
+// Navigation
+export { NavBar } from "./components/navigation/NavBar";
+export { Link } from "./components/navigation/Link";
 // ===============================
 // THEME SYSTEM
 // ===============================
@@ -49,3 +54,21 @@ export * from "./theme/colors.base"; // baseLight, baseDark, baseTheme
 // ===============================
 
 export * from "./utils/deepMerge";
+
+// ===============================
+// AUTH, STORAGE & API
+// ===============================
+export * from "./auth/types";
+export * from "./auth/AuthProvider";
+export * from "./auth/useAuth";
+
+export * from "./storage/expoSecureStore";
+export * from "./storage/localStorage";
+
+export * from "./api/djangoSimpleJwt";
+
+// UI opzionali
+export { LoginReact } from "./components/auth/LoginReact";
+export { LoginWeb } from "./components/auth/LoginWeb";
+
+

@@ -241,18 +241,16 @@ children: ReactNode
 {`style: ViewStyle
   Stili del contenitore.
 
-textStyle: TextStyle
-  Override degli stili del testo.
-
-children: string | ReactNode
+  children: string | ReactNode
   Codice da visualizzare.`}
         </Code>
 
         {/* ESEMPIO */}
         <Heading level={4} style={{ marginTop: 20 }}>Esempio</Heading>
         <Code style={{ marginTop: 10 }}>
-{`const palette = colors[type];
-const finalBg = bgColor || palette.bg;`}
+{`<Code style={{ marginTop: 10 }}>
+  const greeting = "Hello, World!";
+</Code>`}
         </Code>
       </Card>
 
