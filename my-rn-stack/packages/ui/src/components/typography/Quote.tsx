@@ -1,46 +1,28 @@
+// ui/components/typography/Quote.tsx
+
 import React from "react";
-import { View, Text, StyleSheet, ViewProps } from "react-native";
+import { View } from "react-native";
+import { Text } from "./Text";
 import { useTheme } from "../../theme/useTheme";
 
-interface QuoteProps extends ViewProps {
-  children: React.ReactNode;
-}
-
-export function Quote({ children, style, ...rest }: QuoteProps) {
-  const { colors } = useTheme();
+export function Quote({ children }: { children: React.ReactNode }) {
+  const { theme, colors } = useTheme();
 
   return (
     <View
-      {...rest}
-      style={[
-        styles.container,
-        {
-          borderLeftColor: colors.primary?.bg ?? "#FF8A3D",
-        },
-        style,
-      ]}
+      style={{
+        borderLeftWidth: 4,
+        borderLeftColor: colors.primary,
+        paddingLeft: theme.space.md,
+        marginVertical: theme.space.md,
+      }}
     >
       <Text
-        style={[
-          styles.text,
-          { color: colors.text },
-        ]}
+        variant="muted"
+        style={{ fontStyle: "italic" }}
       >
         {children}
       </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    borderLeftWidth: 4,
-    paddingLeft: 12,
-    marginTop: 12,
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 22,
-    fontStyle: "italic",
-  },
-});

@@ -1,23 +1,21 @@
-import React from "react";
-import { Text, TextProps } from "react-native";
+// ui/components/typography/P.tsx
+
+import { Text } from "./Text";
+import { TextProps } from "react-native";
 import { useTheme } from "../../theme/useTheme";
 
-export interface PProps extends TextProps {
-  children: React.ReactNode;
-}
-
-export function P({ children, style, ...rest }: PProps) {
-  const { colors } = useTheme();
+export function P({
+  props: TextProps,
+  style,
+  children,
+  ...rest
+}) {
+  const { theme } = useTheme();
 
   return (
     <Text
       {...rest}
       style={[
-        {
-          fontSize: 16,
-          lineHeight: 22,
-          color: colors.text,
-        },
         style,
       ]}
     >

@@ -1,0 +1,59 @@
+import React from "react";
+import { Column, Heading, P, TextGroup, Divider, Card, Code, Row, Link } from "ui";
+
+export default function ShadowsDocs() {
+  return (
+    <Column style={{ padding: 30 }}>
+      <TextGroup>
+        <Heading level={1}>Shadows</Heading>
+        <P>
+        Le shadow rappresentano livelli di elevazione,
+        non decorazioni casuali.
+        </P>
+        <Code>{`// src/tokens/shadows.base.ts
+
+export const shadows = {
+  none: {
+    shadowColor: "transparent",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
+  },
+
+  sm: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+
+  md: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+
+  lg: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 6,
+  },
+} as const;
+
+export type Shadow = keyof typeof shadows;
+`}</Code>
+        </TextGroup>
+
+      <Row justify="space-between">
+        <Link href="/docs/tokens/spacing" variant="button" size="lg">Spacing</Link>
+        <Link href="/docs/tokens/typography" variant="button" size="lg">Typography</Link>
+      </Row>
+    </Column>
+  );
+}

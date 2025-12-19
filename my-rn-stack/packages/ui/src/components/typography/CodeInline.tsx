@@ -1,31 +1,29 @@
+// ui/components/typography/CodeInline.tsx
+
 import React from "react";
-import { Text, TextProps } from "react-native";
+import { TextProps } from "react-native";
+import { Text } from "./Text";
 import { useTheme } from "../../theme/useTheme";
 
-export interface CodeInlineProps extends TextProps {
-  children: React.ReactNode;
-}
-
-export function CodeInline({ children, style, ...rest }: CodeInlineProps) {
-  const { colors } = useTheme();
+export function CodeInline(props: TextProps) {
+  const { theme, colors } = useTheme();
 
   return (
     <Text
-      {...rest}
+      {...props}
+      size="sm"
       style={[
         {
-          fontFamily: "monospace",
-          fontSize: 14,
-          paddingVertical: 2,
-          paddingHorizontal: 4,
-          borderRadius: 4,
-          backgroundColor: colors.codeBg,
-          color: colors.codeText,
+          fontFamily: theme.typography.fontFamily.mono,
+          backgroundColor: colors.surface,
+          borderColor: colors.border,
+          borderWidth: 1,
+          borderRadius: theme.radius.sm,
+          paddingHorizontal: theme.space.sm,
+          paddingVertical: 1,
         },
-        style,
+        props.style,
       ]}
-    >
-      {children}
-    </Text>
+    />
   );
 }

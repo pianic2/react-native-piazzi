@@ -1,13 +1,29 @@
+// ui/components/layout/Spacer.tsx
+
 import React from "react";
 import { View } from "react-native";
+import { useTheme } from "../../theme/useTheme";
+
+type SpaceKey = keyof ReturnType<typeof useTheme>["theme"]["space"];
 
 interface SpacerProps {
-  size?: number;
+  size?: SpaceKey;
   horizontal?: boolean;
 }
 
-export function Spacer({ size = 10, horizontal = false }: SpacerProps) {
+export function Spacer({
+  size = "md",
+  horizontal = false,
+}: SpacerProps) {
+  const { theme } = useTheme();
+
   return (
-    <View style={horizontal ? { width: size } : { height: size }} />
+    <View
+      style={
+        horizontal
+          ? { width: theme.space[size] }
+          : { height: theme.space[size] }
+      }
+    />
   );
 }

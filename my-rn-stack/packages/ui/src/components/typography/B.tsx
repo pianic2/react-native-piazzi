@@ -1,26 +1,8 @@
-import React from "react";
-import { Text, TextProps } from "react-native";
-import { useTheme } from "../../theme/useTheme";
+// ui/components/typography/B.tsx
 
-export interface BProps extends TextProps {
-  children: React.ReactNode;
-}
+import { Text } from "./Text";
+import { TextProps } from "react-native";
 
-export function B({ children, style, ...rest }: BProps) {
-  const { colors } = useTheme();
-
-  return (
-    <Text
-      {...rest}
-      style={[
-        {
-          fontWeight: "700",
-          color: colors.text,
-        },
-        style
-      ]}
-    >
-      {children}
-    </Text>
-  );
+export function B(props: TextProps) {
+  return <Text weight="bold" {...props} />;
 }

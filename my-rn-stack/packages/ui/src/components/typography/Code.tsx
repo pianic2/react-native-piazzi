@@ -2,42 +2,51 @@ import React, { useState } from "react";
 import {
   Text,
   View,
-  StyleSheet,
+  Pressable,
   ViewProps,
   TextProps,
-  Pressable,
+  Platform,
 } from "react-native";
-import Clipboard from "@react-native-clipboard/clipboard";
+import { Copy, Check } from "lucide-react-native";
 import { useTheme } from "../../theme/useTheme";
+import { copyToClipboard } from "../../utils/clipboard";
 
 interface CodeProps extends ViewProps {
-  children: React.ReactNode;
+  children: string | number;
   textStyle?: TextProps["style"];
 }
 
-export function Code({ children, style, textStyle, ...rest }: CodeProps) {
-  const { colors } = useTheme();
+export function Code({
+  children,
+  style,
+  textStyle,
+  ...rest
+}: CodeProps) {
+  const { theme, colors } = useTheme();
   const [copied, setCopied] = useState(false);
 
-  function handleCopy() {
-    if (typeof children === "string") {
-      Clipboard.setString(children);
-    } else {
-      Clipboard.setString("");
-    }
-
+  async function handleCopy() {
+    await copyToClipboard(String(children));
     setCopied(true);
-    setTimeout(() => setCopied(false), 1200);
+    setTimeout(() => setCopied(false), 1400);
   }
 
   return (
     <View
       {...rest}
       style={[
-        styles.wrapper,
         {
-          backgroundColor: colors.codeBg,
+          position: "relative",
+          minHeight: 40, // 🔒 contratto con Button md
+          borderWidth: 1,
+          borderRadius: theme.radius.md,
           borderColor: colors.codeBorder,
+          backgroundColor: colors.codeBg,
+
+          flexDirection: "row",
+          alignItems: "center", // 🔑 allineamento verticale
+          paddingHorizontal: theme.space.md,
+          paddingRight: 40, // spazio riservato al copy button
         },
         style,
       ]}
@@ -45,31 +54,41 @@ export function Code({ children, style, textStyle, ...rest }: CodeProps) {
       {/* COPY BUTTON */}
       <Pressable
         onPress={handleCopy}
-        style={({ pressed }) => [
-          styles.copyBtn,
-          {
-            backgroundColor: pressed
+        hitSlop={8}
+        android_ripple={{ color: colors.codeBorder }}
+        style={({ pressed }) => ({
+          position: "absolute",
+          right: theme.space.xs,
+          top: theme.space.sm,
+          stransform: [{ translateY: -14 }],
+          height: 28,
+          width: 28,
+          borderRadius: theme.radius.sm,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor:
+            pressed && Platform.OS !== "android"
               ? colors.codeBorder
-              : colors.codeBg,
-          },
-        ]}
+              : "transparent",
+        })}
       >
-        <Text
-          style={{
-            color: colors.codeText,
-            fontSize: 12,
-            fontWeight: "600",
-          }}
-        >
-          {copied ? "Copied!" : "Copy"}
-        </Text>
+        {copied ? (
+          <Check size={14} color={colors.codeText} />
+        ) : (
+          <Copy size={14} color={colors.codeText} />
+        )}
       </Pressable>
 
       {/* CODE TEXT */}
       <Text
         style={[
-          styles.text,
-          { color: colors.codeText },
+          {
+            paddingVertical: theme.space.md,
+            color: colors.codeText,
+            fontFamily: theme.typography.fontFamily.mono,
+            fontSize: theme.typography.fontSize.sm,
+            lineHeight: theme.typography.lineHeight.md,
+          },
           textStyle,
         ]}
       >
@@ -78,26 +97,3 @@ export function Code({ children, style, textStyle, ...rest }: CodeProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 10,
-    position: "relative",
-  },
-  copyBtn: {
-    position: "absolute",
-    right: 8,
-    top: 8,
-    zIndex: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 6,
-  },
-  text: {
-    fontFamily: "monospace",
-    fontSize: 14,
-    lineHeight: 20,
-  },
-});

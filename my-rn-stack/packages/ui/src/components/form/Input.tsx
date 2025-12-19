@@ -1,73 +1,83 @@
-import React from "react";
-import { TextInput, StyleSheet, TextInputProps } from "react-native";
-import { useTheme } from "../../theme/useTheme";
+// ui/components/form/Input.tsx
 
-type FormStatus = "default" | "error" | "success" | "warning";
-type Variant = "outline" | "filled" | "unstyled";
-type ColorScheme =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "success"
-  | "warning"
-  | "danger";
+import React, { useState } from "react";
+import {
+  View,
+  TextInput,
+  TextInputProps,
+} from "react-native";
+import { LucideIcon } from "lucide-react-native";
+import { useTheme } from "../../theme/useTheme";
 
 interface InputProps extends TextInputProps {
   error?: boolean;
-  status?: FormStatus;
-  variant?: Variant;
-  colorScheme?: ColorScheme;
+  helperText?: string;
+  leftIcon?: LucideIcon;
+  rightIcon?: LucideIcon;
 }
 
 export function Input({
-  error,
-  status = "default",
-  variant = "outline",
-  colorScheme = "outline",
+  error = false,
+  editable = true,
+  leftIcon: LeftIcon,
+  rightIcon: RightIcon,
   style,
   ...rest
 }: InputProps) {
-  const { colors } = useTheme();
+  const { theme, colors } = useTheme();
+  const [focused, setFocused] = useState(false);
 
-  const isError = !!error || status === "error";
-  const palette =
-    (colors as any)[colorScheme] || (colors as any).outline || colors.primary;
-
-  const borderColor = isError ? colors.danger.bg : palette.border;
-  const backgroundColor =
-    variant === "filled"
-      ? palette.bg
-      : variant === "unstyled"
-      ? "transparent"
-      : colors.surface;
-
-  const borderWidth = variant === "unstyled" ? 0 : 1;
-  const borderRadius = variant === "unstyled" ? 0 : 10;
+  const borderColor = error
+    ? colors.error
+    : focused
+    ? colors.primary
+    : colors.border;
 
   return (
-    <TextInput
-      {...rest}
-      placeholderTextColor={colors.text + "88"}
-      style={[
-        styles.input,
-        {
-          borderColor,
-          borderWidth,
-          borderRadius,
-          backgroundColor,
-          color: colors.text,
-        },
-        style,
-      ]}
-    />
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor,
+        borderRadius: theme.radius.md,
+        backgroundColor: editable
+          ? colors.surface
+          : colors.disabledBg,
+        paddingHorizontal: theme.space.sm,
+      }}
+    >
+      {LeftIcon && (
+        <LeftIcon
+          size={18}
+          color={colors.textMuted}
+          style={{ marginRight: theme.space.xs }}
+        />
+      )}
+
+      <TextInput
+        {...rest}
+        editable={editable}
+        placeholderTextColor={colors.textMuted}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        style={[
+          {
+            flex: 1,
+            height: theme.components?.input?.height ?? 44,
+            color: colors.textPrimary,
+          },
+          style,
+        ]}
+      />
+
+      {RightIcon && (
+        <RightIcon
+          size={18}
+          color={colors.textMuted}
+          style={{ marginLeft: theme.space.xs }}
+        />
+      )}
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: "100%",
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    fontSize: 16,
-  },
-});

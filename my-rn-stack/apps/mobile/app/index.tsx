@@ -1,189 +1,139 @@
-import { Link } from "expo-router";
+import React from "react";
+import { ScrollView } from "react-native";
+
+// UI – esclusivamente dalla tua libreria
 import {
-  Screen,
-  Section,
+  Column,
+  Row,
+  Page,
+  Card,
   Heading,
   P,
+  B,
+  Quote,
   Small,
-  Row,
-  Column,
+  TextGroup,
   Divider,
-  Card,
-  Code,
-  CodeInline,
   Button,
-  Spacer,
+  Link,
+  CodeInline,
+  Box,
+  Code,
   useTheme,
-  NavBar
+  useNavLogo
 } from "ui";
 
-export default function Home() {
-  const { mode, toggleTheme } = useTheme();
+import {Dimensions} from 'react-native';
+
+export default function Index() {
+  const { theme } = useTheme();
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
 
   return (
-    <Screen>
-      {/* HERO */}
-      <Section>
-        <Heading level={1}>SmartTutor UI</Heading>
+      <Page>
 
-        <P style={{ marginTop: 6 }}>
-          Una libreria UI modulare, tematizzata e perfettamente integrata con Expo.
-          Pensata per progetti scalabili, puliti e veloci da sviluppare.
-        </P>
+        {/* ===============================
+            HERO
+        =============================== */}
+        <TextGroup>
+          <Heading level={1}>Benvenuto in UI Library!</Heading>
 
-        <Small>
-          Componenti cross-platform (Android, iOS, Web) con Theme System integrato.
-        </Small>
-      </Section>
+          <Heading level={5} align="justify">
+            Una UI cross-platform pensata per React Native, Expo e Web.
+            Inizia aggiungendo la libreria alla tua app ed inizia a programmare!
+          </Heading>
 
-      <Spacer size={30} />
+          <Row>
+            <Code>npm install ui</Code>
+            <Link href="/docs" variant="button">
+              Read Docs
+            </Link>
+          </Row>
 
-      {/* INSTALLAZIONE */}
-      <Section>
-        <Heading level={2}>Installazione</Heading>
-        <Divider />
+        </TextGroup>
+
+              <TextGroup>
+                <Heading level={2}>Filosofia</Heading>
+                <P>
+                  Il nostro slogan è
+                </P>
+                <Quote>Ready to Paste</Quote>
+                <P>Se un componente richiede spiegazioni verbali per essere usato, è considerato incompleto.</P>
+                <P>
+                  Questa libreria non è una semplice raccolta di componenti.
+                  È un design system operativo, basato su questi principi:
+                </P>
+
+                <TextGroup spacing={theme.space.sm}>
+                  <B>• token centralizzati</B>
+                  <B>• API esplicite</B>
+                  <B>• zero comportamento “magico”</B>
+                  <B>• composizione sopra la configurazione</B>
+                  <B>• layout coerente per default</B>
+                </TextGroup>
+              </TextGroup>
+
+
+      <TextGroup>
+        <Heading level={2}>Getting Started</Heading>
 
         <P>
-          Installa la libreria nel tuo progetto Expo o React Native.
-          Questo comando aggiunge SmartTutor UI alle tue dipendenze.
+          Installa la libreria.
         </P>
-
-        <Spacer size={12} />
-
         <Code>{`npm install ui`}</Code>
-
-        <Small>
-          Puoi usare anche <Small>yarn</Small> o <Small>pnpm</Small>.
-        </Small>
-
-        <Spacer size={18} />
-
-        <Row gap={12}>
-          <Link href="/getting-started#installazione" asChild>
-            <Button title="Leggi di più sull’installazione" type="outline" />
-          </Link><></>
-        </Row>
-      </Section>
-
-      <Spacer size={30} />
-
-      {/* INTEGRAZIONE TEMA */}
-      <Section>
-        <Heading level={2}>Integrazione nella tua App</Heading>
-        <Divider />
-
         <P>
-          Per abilitare sistema di tematizzazione, colori, tipografia e layout,
-          la tua app deve essere avvolta dal <Small>ThemeProvider</Small>.
+          Inizia racchiudendo i tuoi <CodeInline>Slot</CodeInline>{" "}
+          all'interno di <CodeInline>ThemeProvider</CodeInline>:{" "}
+          da adesso potrai utilizzare il <CodeInline>ThemeContext</CodeInline>{" "}
+          della libreria.
         </P>
 
-        <P>
-          Questo permette a tutti i componenti di reagire automaticamente al tema corrente.
-        </P>
+        <Code>{`app/_layout.tsx
 
-        <Spacer size={12} />
+  import { React } from "react";
+  import { Slot } from "expo-router";
 
-        <Code>
-          {`import { ThemeProvider } from "ui";
+  import { ThemeProvider } from "ui";
 
-export default function App() {
-  return (<ThemeProvider>
-    <RootLayout />
-  </ThemeProvider>);
-}`}
-        </Code>
+  export default function RootLayout() {
 
-        <Spacer size={20} />
-
-        <Row gap={12}>
-          <Link href="/getting-started#theme-provider" asChild>
-            <Button title="Come funziona il ThemeProvider" type="outline" />
-          </Link><></>
-        </Row>
-      </Section>
-
-      <Spacer size={30} />
-
-      {/* UTILIZZO */}
-      <Section>
-        <Heading level={2}>Utilizzo rapido</Heading>
-        <Divider />
-
-        <P>Ora puoi importare qualsiasi componente:</P>
-
-        <Spacer size={12} />
-
-        <Code>
-          {`import { Button, Card, Heading, P } from "ui";
-
-export default function MyComponent() {
   return (
-    <Card>
-      <Heading level={3}>Benvenuto in SmartTutor UI</Heading>
-      <P>Questo è un esempio di utilizzo dei componenti.</P>
-      <Button title="Cliccami" onPress={() => alert("Ciao!")} />
-    </Card>
+    <ThemeProvider>
+
+      {/* Contenuto delle route */}
+      <Slot />
+    </ThemeProvider>
   );
-}`}
-        </Code>
+  }`}</Code>
+        <P>
 
-        <Small>
-          Ogni componente utilizza automaticamente stile, spacing, colori e tipografia del tema.
-        </Small>
+        </P>
 
-        <Spacer size={20} />
-
-        <Row gap={12}>
-          <Link href="/getting-started#utilizzo" asChild>
-            <Button title="Guida completa all’utilizzo" type="outline" />
-          </Link><></>
+        <Row>
+          <Link href="/getting-started" variant="button">
+            Getting Started
+          </Link>
         </Row>
-      </Section>
 
-      <Spacer size={30} />
+      </TextGroup>
 
-      {/* COMPONENTI */}
-      <Section>
-        <Heading level={2}>Componenti disponibili</Heading>
-        <Divider />
-
-        <P>Esplora la documentazione completa:</P>
-
-        <Column gap={12} style={{ marginTop: 12 }}>
-          <Link href="/components/theme" asChild>
-            <Button title="Theme" type="outline" />
-          </Link>
-
-          <Link href="/components/typography" asChild>
-            <Button title="Typography" type="outline" />
-          </Link>
-
-          <Link href="/components/layout" asChild>
-            <Button title="Layout" type="outline" />
-          </Link>
-
-          <Link href="/components/form" asChild>
-            <Button title="Form" type="outline" />
-          </Link>
-
-          <Link href="/components/buttons" asChild>
-            <Button title="Buttons" type="outline" />
-          </Link>
-
-          <Link href="/components/card" asChild>
-            <Button title="Card" type="outline" />
-          </Link>
-        </Column>
-      </Section>
-
-      <Spacer size={40} />
-
-      {/* FOOTER */}
-      <Section>
-        <Divider />
-        <Small>SmartTutor UI – Libreria Open Source</Small>
-      </Section>
-
-    </Screen>
+      <TextGroup>
+        <Heading level={2}>Componenti</Heading>
+        <P>
+        Per ogni componente troverai un <B>DOC</B> contente spiegazioni ed esempi.{" "}
+        I componenti sono raggruppati a gruppi:
+        </P>
+        <TextGroup>
+          <Link href="docs/components/typography" variant="button">Tipografia</Link>
+          <Link href="docs/components/layout" variant="button">Layout</Link>
+          <Link href="docs/components/surfaces" variant="button">Superfici</Link>
+          <Link href="docs/components/overview" variant="button">Sovrapposizione</Link>
+          <Link href="docs/components/navigation" variant="button">Navigazione</Link>
+          <Link href="docs/components/feedback" variant="button">Feedback</Link>
+          <Link href="docs/components/form" variant="button">Form</Link>
+        </TextGroup>
+      </TextGroup>
+    </Page>
   );
 }

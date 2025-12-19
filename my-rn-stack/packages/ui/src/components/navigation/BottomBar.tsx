@@ -1,77 +1,72 @@
+// ui/components/navigation/BottomBar.tsx
+
 import React from "react";
-import {
-  View,
-  Pressable,
-  Text,
-  StyleSheet,
-} from "react-native";
+import { Pressable, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import { useTheme } from "../../theme/useTheme";
+import { Text } from "../typography/Text";
+import { useNav } from "./NavContext";
 
-export interface BottomBarItem {
-  icon?: React.ReactNode;
-  label?: string;
-  href?: string;
-  onPress?: () => void;
-}
-
-export interface BottomBarProps {
-  items: BottomBarItem[];
-  style?: any;
-}
-
-export function BottomBar({ items, style }: BottomBarProps) {
-  const { colors } = useTheme();
+export function BottomBar({ maxItems = 5 }: { maxItems?: 3 | 4 | 5 }) {
+  const { colors, theme } = useTheme();
   const insets = useSafeAreaInsets();
+
+  const { items, pathname, navigate } = useNav();
+  const visibleItems = items.slice(0, maxItems);
 
   return (
     <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: colors.navBg ?? colors.cardBg,
-          borderColor: colors.navBorder ?? colors.cardBorder,
-          paddingBottom: insets.bottom,
-        },
-        style,
-      ]}
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: 0,
+
+        borderTopWidth: 1,
+        borderTopColor: colors.border,
+        backgroundColor: colors.surface,
+
+        flexDirection: "row",
+        justifyContent: "space-around",
+
+        paddingTop: theme.space.xs,
+        paddingBottom: theme.space.xs,
+
+        // layering (se hai zIndex tokens, usa quelli)
+        zIndex: theme.zIndex?.navigation ?? 100,
+        height: 60,
+      }}
     >
-      {items.map((item, index) => (
-        <Pressable
-          key={index}
-          onPress={item.onPress}
-          style={({ pressed }) => [
-            styles.item,
-            { opacity: pressed ? 0.6 : 1 },
-          ]}
-        >
-          {item.icon}
-          {item.label && (
-            <Text style={[styles.label, { color: colors.text }]}>
-              {item.label}
+      {visibleItems.map((it) => {
+        const active = pathname === it.href;
+        const IconNode = active ? it.activeIcon ?? it.icon : it.icon;
+
+        return (
+          <Pressable
+            key={it.href}
+            onPress={() => navigate(it.href)}
+            style={({ pressed }) => ({
+              alignItems: "center",
+              justifyContent: "center",
+              minWidth: 64,
+              opacity: pressed ? 0.7 : 1,
+              paddingVertical: theme.space.xs,
+            })}
+          >
+            {IconNode}
+
+            <Text
+              size="sm"
+              weight={active ? "bold" : "medium"}
+              variant={active ? "default" : "muted"}
+              style={{ marginTop: 4 }}
+            >
+              {it.label}
             </Text>
-          )}
-        </Pressable>
-      ))}
+          </Pressable>
+        );
+      })}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    borderTopWidth: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingTop: 8,
-  },
-  item: {
-    alignItems: "center",
-    justifyContent: "center",
-    minWidth: 60,
-  },
-  label: {
-    fontSize: 12,
-    marginTop: 4,
-  },
-});

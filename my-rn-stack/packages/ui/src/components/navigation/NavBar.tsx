@@ -1,68 +1,54 @@
 import React from "react";
-import { isWeb } from "../../utils/platform";
+import { View, Platform } from "react-native";
+import { useRouter, usePathname } from "expo-router";
+import { NavProvider, NavItem } from "./NavContext";
 import { TopBar } from "./TopBar";
 import { BottomBar } from "./BottomBar";
-
-export interface NavAction {
-  label?: string;
-  icon?: React.ReactNode;
-  href?: string;
-  onPress?: () => void;
-}
+import { SideBar } from "./SideBar";
 
 export interface NavBarProps {
-  title?: string;              // usato solo su Web
-  logo?: React.ReactNode;      // usato solo su Web
-  left?: NavAction | null;     // usato solo su Web
-  right?: NavAction[];         // Web (array), Mobile ignorato
-  items?: NavAction[];         // Web (centrale), Mobile (tabs)
-  force?: "web" | "mobile";
-  style?: any;
+  items?: NavItem[];
+  logo?: React.ReactNode;
+  layout?: "auto" | "top" | "bottom" | "sidebar";
+  bottomMaxItems?: number;
+  sidebarWidth?: number;
 }
 
-/**
- * Navigation bar adattiva:
- * - Web → usa TopBar
- * - Mobile → usa BottomBar
- */
 export function NavBar({
-  title,
+  items,
   logo,
-  left,
-  right = [],
-  items = [],
-  force,
-  style,
+
+  layout = "auto",
+  bottomMaxItems = 5,
+  sidebarWidth = 260,
 }: NavBarProps) {
-  
-  const isWebDevice =
-    force === "web" ? true :
-    force === "mobile" ? false :
-    isWeb();
+  const router = useRouter();
+  const pathname = usePathname();
 
-  /* ---------------------------------------------
-   * WEB → TopBar
-   * --------------------------------------------- */
-  if (isWebDevice) {
-    return (
-      <TopBar
-        title={title}
-        logo={logo}
-        items={items}
-        right={right}
-        style={style}
-      />
-    );
-  }
+  const navigate = (href: string) => {
+    if (href !== pathname) {
+      router.push(href as any);
+    }
+  };
 
-  /* ---------------------------------------------
-   * MOBILE → BottomBar
-   * BottomBar usa SOLO items[]
-   * --------------------------------------------- */
+
+  const finalLayout =
+    layout === "auto"
+      ? Platform.OS === "web"
+        ? "top"
+        : "bottom"
+      : layout;
+
   return (
-    <BottomBar
+    <NavProvider
       items={items}
-      style={style}
-    />
+      logo={logo}
+      navigate={navigate}
+      pathname={pathname}
+      >
+      {finalLayout === "top" && <TopBar />}
+      {finalLayout === "bottom" && (<BottomBar maxItems={bottomMaxItems} />)}
+      {finalLayout === "sidebar" && (<SideBar width={sidebarWidth} />)}
+    </NavProvider>
   );
 }

@@ -1,73 +1,59 @@
-import React, { useRef, useEffect } from "react";
-import { Pressable, Animated, StyleSheet, View } from "react-native";
+// ui/components/form/Checkbox.tsx
+
+import React from "react";
+import { Pressable, View } from "react-native";
 import { Check } from "lucide-react-native";
 import { useTheme } from "../../theme/useTheme";
-
-type FormStatus = "default" | "error" | "success" | "warning";
-type ColorScheme =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "success"
-  | "warning"
-  | "danger";
+import { Text } from "../typography/Text";
 
 interface CheckboxProps {
   checked: boolean;
-  onChange: (checked: boolean) => void;
-  status?: FormStatus;
-  colorScheme?: ColorScheme;
+  onChange: (v: boolean) => void;
+  label?: string;
+  disabled?: boolean;
 }
 
 export function Checkbox({
   checked,
   onChange,
-  status = "default",
-  colorScheme = "primary",
+  label,
+  disabled = false,
 }: CheckboxProps) {
-  const { colors } = useTheme();
-  const scale = useRef(new Animated.Value(checked ? 1 : 0)).current;
-
-  useEffect(() => {
-    Animated.spring(scale, {
-      toValue: checked ? 1 : 0,
-      useNativeDriver: true,
-    }).start();
-  }, [checked, scale]);
-
-  const palette =
-    (colors as any)[colorScheme] || (colors as any).primary || colors.primary;
-
-  const backgroundColor =
-    status === "error"
-      ? colors.danger.bg
-      : checked
-      ? palette.bg
-      : "transparent";
+  const { theme, colors } = useTheme();
 
   return (
-    <Pressable onPress={() => onChange(!checked)}>
+    <Pressable
+      onPress={() => !disabled && onChange(!checked)}
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        opacity: disabled ? 0.5 : 1,
+      }}
+    >
       <View
-        style={[
-          styles.box,
-          { borderColor: palette.border, backgroundColor },
-        ]}
+        style={{
+          width: 22,
+          height: 22,
+          borderWidth: 2,
+          borderRadius: theme.radius.sm,
+          borderColor: colors.border,
+          backgroundColor: checked
+            ? colors.primary
+            : "transparent",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <Animated.View style={{ transform: [{ scale }] }}>
-          {checked && <Check size={18} color="#fff" />}
-        </Animated.View>
+        {checked && (
+          <Check size={16} color={colors.textInverted} />
+        )}
       </View>
+
+      {label && (
+        <Text style={{ marginLeft: theme.space.sm }}>
+          {label}
+        </Text>
+      )}
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  box: {
-    width: 22,
-    height: 22,
-    borderWidth: 2,
-    borderRadius: 6,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -1,69 +1,133 @@
+// ui/components/navigation/Link.tsx
+
 import React from "react";
 import {
-  Text,
   Pressable,
-  StyleSheet,
+  Text,
   TextStyle,
   ViewStyle,
-  GestureResponderEvent,
+  Platform,
+  Linking,
 } from "react-native";
-import { Link as ExpoLink } from "expo-router";
+import { router } from "expo-router";
 import { useTheme } from "../../theme/useTheme";
+import { useOptionalNav } from "./NavContext";
+
+type LinkVariant = "text" | "button";
+type LinkSize = "sm" | "md" | "lg";
 
 export interface LinkProps {
   href: string;
   children: React.ReactNode;
-  style?: TextStyle;
-  containerStyle?: ViewStyle;
+
+  variant?: LinkVariant;
+  size?: LinkSize;
   underline?: boolean;
-  color?: string;
-  size?: number;
-  weight?: TextStyle["fontWeight"];
-  onPress?: (e: GestureResponderEvent) => void;
-  asChild?: boolean;
+
+  // Styles
+  containerStyle?: ViewStyle | ViewStyle[];
+  style?: TextStyle | TextStyle[];
+
+  // Active handling
+  activeStyle?: TextStyle | TextStyle[];
+  activeContainerStyle?: ViewStyle | ViewStyle[];
+  exact?: boolean;
+
+  onPress?: () => void;
 }
 
 export function Link({
   href,
   children,
-  style,
+  variant = "text",
+  size = "md",
+  underline = false,
   containerStyle,
-  underline = true,
-  color,
-  size = 16,
-  weight = "500",
+  style,
+  activeStyle,
+  activeContainerStyle,
+  exact = true,
   onPress,
-  asChild = false,
 }: LinkProps) {
-  const { colors } = useTheme();
+  const { theme, colors } = useTheme();
+  const nav = useOptionalNav();
 
-  const textStyles: TextStyle = {
-    color: color || colors.linkText || colors.primary,
-    textDecorationLine: underline ? "underline" : "none",
-    fontSize: size,
-    fontWeight: weight,
+  const pathname = nav?.pathname;
+  const isActive = pathname
+    ? exact
+      ? pathname === href
+      : pathname.startsWith(href)
+    : false;
+
+  const heightMap = {
+    sm: 32,
+    md: 40,
+    lg: 48,
   };
 
-  // asChild = integra il Link con un altro componente
-  if (asChild) {
-    return (
-      <ExpoLink href={href} asChild>
-        {children}
-      </ExpoLink>
-    );
+  const paddingXMap = {
+    sm: theme.space.sm,
+    md: theme.space.md,
+    lg: theme.space.lg,
+  };
+
+  function navigate() {
+    if (nav?.navigate) return nav.navigate(href);
+
+    if (/^https?:\/\//i.test(href)) {
+      if (Platform.OS === "web") {
+        window.open(href, "_blank", "noopener,noreferrer");
+        return;
+      }
+      Linking.openURL(href);
+      return;
+    }
+
+    router.push(href as any);
   }
 
   return (
-    <ExpoLink href={href} asChild={false}>
-      <Pressable
-        onPress={onPress}
-        style={({ pressed }) => [
-          containerStyle,
-          pressed && { opacity: 0.6 },
+    <Pressable
+      onPress={() => {
+        onPress?.();
+        navigate();
+      }}
+      style={({ pressed }) => [
+        variant === "button" && {
+          minHeight: heightMap[size], // 🔒 stesso contratto di Button
+          paddingHorizontal: paddingXMap[size],
+          borderRadius: theme.radius.md,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: colors.primary,
+          opacity: pressed ? 0.85 : 1,
+        },
+
+        variant === "text" && pressed && { opacity: 0.7 },
+
+        containerStyle,
+        isActive && activeContainerStyle,
+      ]}
+    >
+      <Text
+        style={[
+          variant === "button"
+            ? {
+                color: colors.textInverted,
+                fontSize: theme.typography.fontSize[size],
+                fontWeight: "600",
+              }
+            : {
+                color: colors.primary,
+                textDecorationLine: underline ? "underline" : "none",
+              },
+
+          style,
+          isActive && activeStyle,
         ]}
       >
-        <Text style={[textStyles, style]}>{children}</Text>
-      </Pressable>
-    </ExpoLink>
+        {children}
+      </Text>
+    </Pressable>
   );
 }

@@ -5,14 +5,14 @@ import { useTheme } from "../../theme/useTheme";
 interface DividerProps {
   color?: string;       // override colore linea
   thickness?: number;   // spessore
-  marginVertical?: number;
+  spacing?: number;
   style?: ViewStyle | ViewStyle[];
 }
 
 export function Divider({
   color,
-  thickness = 1,
-  marginVertical = 12,
+  thickness = 2,
+  spacing = 12,
   style,
 }: DividerProps) {
   const { colors } = useTheme();
@@ -23,7 +23,7 @@ export function Divider({
         {
           height: thickness,
           backgroundColor: color || colors.text + "33", // 20% opacity
-          marginVertical,
+          spacing,
           width: "100%",
         },
         style,

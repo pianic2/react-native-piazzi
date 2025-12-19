@@ -1,124 +1,100 @@
-import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-  View,
-  Platform,
-} from "react-native";
+// ui/components/buttons/Button.tsx
+
+import React from "react";
+import { Pressable, Text } from "react-native";
 import { LucideIcon } from "lucide-react-native";
 import { useTheme } from "../theme/useTheme";
 
-type ButtonType = "primary" | "secondary" | "outline" | "success" | "danger";
-type ButtonSize = "sm" | "md" | "lg";
+type Variant = "primary" | "ghost" | "danger";
+type Size = "sm" | "md" | "lg";
 
 interface ButtonProps {
-  title?: string;
-  onPress?: () => void;
-  type?: ButtonType;
-  size?: ButtonSize;
-  loading?: boolean;
   icon?: LucideIcon;
+  label?: string;
+  onPress?: () => void;
+  variant?: Variant;
+  size?: Size;
   disabled?: boolean;
-
-  // override opzionali
-  bgColor?: string;
-  textColor?: string;
-  borderColor?: string;
 }
 
-export function Button({
-  title,
-  onPress,
-  type = "primary",
-  size = "md",
-  loading = false,
+export default function Button({
   icon: Icon,
+  label,
+  onPress,
+  variant = "primary",
+  size = "md",
   disabled = false,
-  bgColor,
-  textColor,
-  borderColor,
 }: ButtonProps) {
-  const { colors } = useTheme();
+  const { theme, colors } = useTheme();
 
-  // palette dinamica basata sul tipo e sul tema
-  const palette = colors[type];
-
-  // override manuali
-  const finalBg = bgColor || palette?.bg;
-  const finalText = textColor || palette?.text;
-  const finalBorder = borderColor || palette?.border;
-
-  // dimensioni
-  const sizeMap = {
-    sm: { pv: 8, ph: 14, br: 8, fs: 14, is: 16 },
-    md: { pv: 14, ph: 20, br: 10, fs: 16, is: 20 },
-    lg: { pv: 18, ph: 26, br: 12, fs: 18, is: 22 },
+  const heightMap = {
+    sm: 32,
+    md: 40,
+    lg: 48,
   };
 
-  const s = sizeMap[size];
+  const iconSizeMap = {
+    sm: 16,
+    md: 20,
+    lg: 24,
+  };
+
+  const horizontalPadding = {
+    sm: 12,
+    md: 16,
+    lg: 20,
+  };
+
+  const backgroundColor =
+    variant === "primary"
+      ? colors.primary
+      : variant === "danger"
+      ? colors.error
+      : "transparent";
+
+  const contentColor =
+    variant === "ghost"
+      ? colors.textPrimary
+      : colors.textInverted;
+
+  if (__DEV__ && !Icon && !label) {
+    console.warn(
+      "[ui/Button] Button rendered without `icon` and `label`. It will appear empty."
+    );
+  }
 
   return (
-    <TouchableOpacity
+    <Pressable
+      disabled={disabled}
       onPress={onPress}
-      disabled={disabled || loading}
-      activeOpacity={Platform.OS === "ios" ? 0.65 : 1}
-      style={[
-        styles.base,
-        {
-          backgroundColor: finalBg,
-          borderColor: finalBorder,
-          borderWidth: type === "outline" ? 2 : 0,
-          paddingVertical: s.pv,
-          paddingHorizontal: s.ph,
-          borderRadius: s.br,
-          opacity: disabled ? 0.6 : 1,
-        },
-      ]}
+      style={({ pressed }) => ({
+        minHeight: heightMap[size],
+        paddingHorizontal: horizontalPadding[size],
+        paddingVertical: theme.space.md,
+        borderRadius: theme.radius.md,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
+        backgroundColor: pressed
+          ? colors.surface
+          : backgroundColor,
+        opacity: disabled ? 0.5 : 1,
+      })}
     >
-      <View style={styles.row}>
-        {/* ICONA */}
-        {Icon && !loading && (
-          <Icon
-            size={s.is}
-            color={finalText}
-            style={{ marginRight: title ? 10 : 0 }}
-          />
-        )}
+      {Icon && <Icon size={iconSizeMap[size]} color={contentColor} />}
 
-        {/* LOADER */}
-        {loading && <ActivityIndicator size="small" color={finalText} />}
-
-        {/* TITOLO */}
-        {!loading && title && (
-          <Text
-            style={[
-              styles.label,
-              {
-                color: finalText,
-                fontSize: s.fs,
-              },
-            ]}
-          >
-            {title}
-          </Text>
-        )}
-      </View>
-    </TouchableOpacity>
+      {label && (
+        <Text
+          style={{
+            color: contentColor,
+            fontSize: theme.typography.fontSize[size],
+            fontWeight: "600",
+          }}
+        >
+          {label}
+        </Text>
+      )}
+    </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  base: {
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  label: {
-    fontWeight: "600",
-  },
-});

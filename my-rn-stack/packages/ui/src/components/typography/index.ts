@@ -1,0 +1,10 @@
+export { P } from "./P";
+export { B } from "./B";
+export { Small } from "./Small";
+export { Code } from "./Code";
+export { CodeInline } from "./CodeInline";
+export { Quote } from "./Quote";
+export { TextGroup } from "./TextGroup";
+export { Divider } from "./Divider";
+export { Heading } from "./Heading";
+export { Page } from "./Page";

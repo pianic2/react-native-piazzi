@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      * { margin: 0; position: "relative"; border: 0; padding: 0 }
+
+      @keyframes effetto{
+        0% { transform: rotate(0deg)}
+        0% { transform: rotate(360deg)}
+      }
+      .container {
+        background-color: red;
+        position: "absolute";
+        top: 0;
+
+        animation-name: effetto;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        padding: 180px;
+
+        border-spacing: 0;
+      }
+
+      .nero {
+        width: 100px;
+        height: 100px;
+        background-color: black;
+      }
+
+    </style>
+  </head>
+  <body style="background-color: red">
+    <table class="container">
+      <tr>
+        <td class="nero">1</td>
+        <td></td>
+        <td class="nero"></td>
+        <td class="nero"></td>
+        <td class="nero"></td>
+      </tr>
+      <tr>
+        <td class="nero">1</td>
+        <td></td>
+        <td class="nero"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="nero"></td>
+        <td class="nero"></td>
+        <td class="nero"></td>
+        <td class="nero"></td>
+        <td class="nero"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="nero"></td>
+        <td></td>
+        <td class="nero"></td>
+      </tr>
+      <tr>
+        <td class="nero"></td>
+        <td class="nero"></td>
+        <td class="nero"></td>
+        <td></td>
+        <td class="nero"></td>
+      </tr>
+    </table>
+  </body>
+</html>

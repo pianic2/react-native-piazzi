@@ -1,43 +1,44 @@
+// ui/components/typography/Heading.tsx
+
 import React from "react";
-import { Text, StyleSheet, TextStyle } from "react-native";
+import { TextProps } from "react-native";
+import { Text } from "./Text";
 import { useTheme } from "../../theme/useTheme";
 
-type HeadingLevel = 1 | 2 | 3 | 4 | 5;
+type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
-interface HeadingProps {
+interface HeadingProps extends TextProps {
   children: React.ReactNode;
-  level?: HeadingLevel;
-  style?: TextStyle | TextStyle[];
-  color?: string;
-  weight?: TextStyle["fontWeight"];
+
+  level?: Level;
 }
 
 export function Heading({
-  children,
   level = 2,
   style,
-  color,
-  weight,
+  children,
+  align = "left",
+  ...rest
 }: HeadingProps) {
-  const { colors } = useTheme();
+  const { theme } = useTheme();
 
-  const sizeMap = {
-    1: 42,
-    2: 32,
-    3: 24,
-    4: 18,
-    5: 16,
-  };
+  const sizeMap: Record<Level, keyof typeof theme.typography.fontSize> =
+    {
+      1: "xxxl",
+      2: "xxl",
+      3: "xl",
+      4: "lg",
+      5: "md",
+      6: "sm",
+    };
 
   return (
     <Text
+      {...rest}
+      size={sizeMap[level]}
+      weight="bold"
+      align={align}
       style={[
-        styles.base,
-        {
-          fontSize: sizeMap[level],
-          color: color || colors.text,
-          fontWeight: weight || "700",
-        },
         style,
       ]}
     >
@@ -45,9 +46,3 @@ export function Heading({
     </Text>
   );
 }
-
-const styles = StyleSheet.create({
-  base: {
-    marginBottom: 4,
-  },
-});
