@@ -4,12 +4,15 @@ import { Text } from "./Text";
 import { TextProps } from "react-native";
 import { useTheme } from "../../theme/useTheme";
 
+interface PProps extends TextProps {
+  children?: React.ReactNode;
+}
+
 export function P({
-  props: TextProps,
   style,
   children,
   ...rest
-}) {
+}: PProps) {
   const { theme } = useTheme();
 
   return (

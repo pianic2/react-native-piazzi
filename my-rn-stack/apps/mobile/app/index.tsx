@@ -31,7 +31,8 @@ export default function Index() {
   const windowHeight = Dimensions.get('window').height;
 
   return (
-      <Page>
+    <Page>
+            <Column>
 
         {/* ===============================
             HERO
@@ -134,6 +135,7 @@ export default function Index() {
           <Link href="docs/components/form" variant="button">Form</Link>
         </TextGroup>
       </TextGroup>
+    </Column>
     </Page>
   );
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codice Fiscale</title>
+</head>
+<body>
+  <form action="http://api.miocodicefiscale.com/calculate?lname={cognome}&fname={nome}&gender={sesso}&city={luogo-di-nascita}&state={codice-provincia}&abolished={comune-soppresso}&day={giorno-di-nascita}&month={mese-di-nascita}&year={anno-di-nascita}&omocodia_level={livello-omocodia}&access_token={tua-chiave-API}
+">
+  <input type="text" name="name" id="nome" placeholder="Cognome" />
+  <input type="text" name="fname" id="cognome" placeholder="Nome" />
+  <input type="text" name="gender"  id="sesso" placeholder="Sesso (M/F)" />
+  <input type="text" name="city" id="luogo-di-nascita" placeholder="Luogo di nascita" />
+  <input type="text" name="state" id="codice-provincia" placeholder="Codice provincia" />
+  <input type="text" name="abolished" id="comune-soppresso" placeholder="Comune soppresso (se applicabile)" />
+  <input type="text" name="day" id="giorno-di-nascita" placeholder="Giorno di nascita" />
+  <input type="text" name="month" id="mese-di-nascita" placeholder="Mese di nascita" />
+  <input type="text" name="year" id="anno-di-nascita" placeholder="Anno di nascita" />
+  <input type="text" name="omocodia_level" id="livello-omocodia" placeholder="Livello omocodia (0-7)" />
+  <input type="text" name="access_token" id="tua-chiave-API" placeholder="Tua chiave API" />
+  <button type="submit">Calcola Codice Fiscale</button>
+</form>
+</body>
+</html>

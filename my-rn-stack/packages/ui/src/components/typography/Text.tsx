@@ -5,7 +5,7 @@ import { Text as RNText, TextProps } from "react-native";
 import { useTheme } from "../../theme/useTheme";
 
 type Variant = "default" | "muted" | "danger" | "success";
-type Align = "left" | "center" | "right";
+type Align = "left" | "center" | "right" | "justify";
 
 interface Props extends TextProps {
   variant?: Variant;

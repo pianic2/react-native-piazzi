@@ -9,7 +9,7 @@ type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
 interface HeadingProps extends TextProps {
   children: React.ReactNode;
-
+  align?: "left" | "center" | "right" | "justify";
   level?: Level;
 }
 
