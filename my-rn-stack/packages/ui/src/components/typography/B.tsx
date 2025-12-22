@@ -1,8 +1,10 @@
 // ui/components/typography/B.tsx
 
 import { Text } from "./Text";
-import { TextProps } from "react-native";
+import type { ComponentProps } from "react";
 
-export function B(props: TextProps) {
+type PProps = ComponentProps<typeof Text>;
+
+export function B(props: PProps) {
   return <Text weight="bold" {...props} />;
 }

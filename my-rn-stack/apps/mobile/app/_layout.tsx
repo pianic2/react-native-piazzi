@@ -3,7 +3,7 @@
 import React from "react";
 import { Slot } from "expo-router";
 
-import { ThemeProvider, NavBar } from "ui";
+import { ThemeProvider, NavBar, Page } from "ui";
 
 import Logo from "../assets/logo"
 
@@ -22,8 +22,10 @@ export default function RootLayout() {
   return (
     <ThemeProvider withScroll={false}>
 
+      <Page>
         {/* Contenuto delle route */}
         <Slot />
+      </Page>
 
       <NavBar
         logo={<Logo size={40}/>}

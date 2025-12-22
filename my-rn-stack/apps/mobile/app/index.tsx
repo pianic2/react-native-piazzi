@@ -20,10 +20,11 @@ import {
   Box,
   Code,
   useTheme,
-  useNavLogo
+  useNavLogo,
+  Hero
 } from "ui";
 
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
 export default function Index() {
   const { theme } = useTheme();
@@ -31,13 +32,13 @@ export default function Index() {
   const windowHeight = Dimensions.get('window').height;
 
   return (
-    <Page>
-            <Column>
+    <Column gap="xxl">
 
-        {/* ===============================
+      {/* ===============================
             HERO
         =============================== */}
-        <TextGroup>
+      <Hero>
+        <TextGroup spacing={theme.space.xl}>
           <Heading level={1}>Benvenuto in UI Library!</Heading>
 
           <Heading level={5} align="justify">
@@ -53,28 +54,28 @@ export default function Index() {
           </Row>
 
         </TextGroup>
+      </Hero>
 
-              <TextGroup>
-                <Heading level={2}>Filosofia</Heading>
-                <P>
-                  Il nostro slogan è
-                </P>
-                <Quote>Ready to Paste</Quote>
-                <P>Se un componente richiede spiegazioni verbali per essere usato, è considerato incompleto.</P>
-                <P>
-                  Questa libreria non è una semplice raccolta di componenti.
-                  È un design system operativo, basato su questi principi:
-                </P>
+      <TextGroup>
+        <Heading level={2}>Filosofia</Heading>
+        <P>
+          Il nostro slogan è
+        </P>
+        <Quote>Ready to Paste</Quote>
+        <P>Se un componente richiede spiegazioni verbali per essere usato, è considerato incompleto.</P>
+        <P>
+          Questa libreria non è una semplice raccolta di componenti.
+          È un design system operativo, basato su questi principi:
+        </P>
 
-                <TextGroup spacing={theme.space.sm}>
-                  <B>• token centralizzati</B>
-                  <B>• API esplicite</B>
-                  <B>• zero comportamento “magico”</B>
-                  <B>• composizione sopra la configurazione</B>
-                  <B>• layout coerente per default</B>
-                </TextGroup>
-              </TextGroup>
-
+        <TextGroup spacing={theme.space.sm}>
+          <Button variant="ghost" disabled={true} label="token centralizzati" />
+          <Button variant="ghost" disabled={true} label="API esplicite" />
+          <Button variant="ghost" disabled={true} label="zero comportamento “magico”" />
+          <Button variant="ghost" disabled={true} label="composizione sopra la configurazione" />
+          <Button variant="ghost" disabled={true} label="layout coerente per default" />
+        </TextGroup>
+      </TextGroup>
 
       <TextGroup>
         <Heading level={2}>Getting Started</Heading>
@@ -107,10 +108,6 @@ export default function Index() {
     </ThemeProvider>
   );
   }`}</Code>
-        <P>
-
-        </P>
-
         <Row>
           <Link href="/getting-started" variant="button">
             Getting Started
@@ -122,8 +119,8 @@ export default function Index() {
       <TextGroup>
         <Heading level={2}>Componenti</Heading>
         <P>
-        Per ogni componente troverai un <B>DOC</B> contente spiegazioni ed esempi.{" "}
-        I componenti sono raggruppati a gruppi:
+          Per ogni componente troverai un <B>DOC</B> contente spiegazioni ed esempi.{" "}
+          I componenti sono raggruppati a gruppi:
         </P>
         <TextGroup>
           <Link href="docs/components/typography" variant="button">Tipografia</Link>
@@ -136,6 +133,5 @@ export default function Index() {
         </TextGroup>
       </TextGroup>
     </Column>
-    </Page>
   );
 }

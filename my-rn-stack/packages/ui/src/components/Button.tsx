@@ -5,7 +5,7 @@ import { Pressable, Text } from "react-native";
 import { LucideIcon } from "lucide-react-native";
 import { useTheme } from "../theme/useTheme";
 
-type Variant = "primary" | "ghost" | "danger";
+type Variant = "primary" | "ghost" | "danger" | "info";
 type Size = "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -57,6 +57,16 @@ export default function Button({
       ? colors.textPrimary
       : colors.textInverted;
 
+  const borderColor =
+    variant === "primary"
+      ? colors.primary
+      : variant === "danger"
+      ? colors.error
+      : variant === "ghost"
+      ? colors.textPrimary
+      : colors.textInverted;
+
+
   if (__DEV__ && !Icon && !label) {
     console.warn(
       "[ui/Button] Button rendered without `icon` and `label`. It will appear empty."
@@ -71,6 +81,8 @@ export default function Button({
         minHeight: heightMap[size],
         paddingHorizontal: horizontalPadding[size],
         paddingVertical: theme.space.md,
+        borderWidth: 2,
+        borderColor: borderColor,
         borderRadius: theme.radius.md,
         flexDirection: "row",
         alignItems: "center",

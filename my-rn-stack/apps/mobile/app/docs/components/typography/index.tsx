@@ -10,11 +10,13 @@ import {
   Code,
   CodeInline,
   Text,
+  Row,
+  Spacer
 } from "ui";
 
 export default function TypographyIndex() {
   return (
-    <Column style={{ padding: 30 }}>
+    <Column>
       {/* =====================================================
           INTRO
       ===================================================== */}
@@ -36,59 +38,129 @@ export default function TypographyIndex() {
       {/* =====================================================
           TEXT COME MODELLO BASE
       ===================================================== */}
-      <TextGroup>
+      <TextGroup spacing="md">
         <Heading level={2}>Text: il modello base</Heading>
         <P>
           <CodeInline>Text</CodeInline> è il componente più basso livello del
-          sistema tipografico. Incapsula:
+          sistema tipografico. {" "}
         </P>
-      </TextGroup>
 
-      <Card style={{ padding: 16 }}>
+
+        <Heading level={3}>Parametri</Heading>
         <TextGroup>
-          <P>• font size (da token)</P>
-          <P>• font weight (da token)</P>
-          <P>• line height coerente</P>
-          <P>• colore semantico (variant)</P>
-          <P>• allineamento</P>
-          <P>• troncamento</P>
+          <Row>
+            <Row justify="flex-end" style={{ width: 100 }}><CodeInline size="sm" align="right">size</CodeInline></Row>
+            <P><B>font size</B> (da token)</P>
+          </Row>
+          <Row>
+            <Row justify="flex-end" style={{ width: 100 }}><CodeInline size="sm">weight</CodeInline></Row>
+            <P><B>font weight</B> (da token)</P>
+          </Row>
+          <Row>
+            <Row justify="flex-end" style={{ width: 100 }}><CodeInline size="sm" align="right">lineHeight</CodeInline></Row>
+            <B>line height coerente</B>
+          </Row>
+          <Row>
+            <Row justify="flex-end" style={{ width: 100 }}><CodeInline size="sm">variant</CodeInline></Row>
+            <P><B>colore semantico</B> (variant)</P></Row>
+          <Row>
+            <Row justify="flex-end" style={{ width: 100 }}><CodeInline size="sm">align</CodeInline></Row>
+            <B>allineamento</B>
+          </Row>
+          <Row>
+            <Row justify="flex-end" style={{ width: 100 }}><CodeInline size="sm">truncate</CodeInline></Row>
+            <B>troncamento</B>
+          </Row>
         </TextGroup>
-      </Card>
 
-      <Card style={{ padding: 16 }}>
-        <TextGroup>
-          <Heading level={3}>API di base</Heading>
-          <Code>{`<Text
+
+        <Heading level={3}>API di base</Heading>
+        <Code>{`<Text
   size="md"
   weight="regular"
   variant="default"
+  align="justify"
+  truncate={false}
 >
   Contenuto testuale
 </Text>`}</Code>
-        </TextGroup>
-      </Card>
 
-      {/* =====================================================
-          SIZE & WEIGHT
-      ===================================================== */}
-      <TextGroup>
-        <Heading level={2}>Size e Weight</Heading>
-        <P>
-          <Code>size</Code> e <Code>weight</Code> mappano direttamente
-          i token di tipografia definiti nel tema.
-        </P>
+
+        <Heading level={3}>Esempio di utilizzo</Heading>
+        <Row style={{ width: "100%" }} gap="md">
+          <Code style={{ flex: 1, minWidth: 0 }}>
+            {`<Text
+  size="xs"
+  weight="regular"
+>
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+</Text>`}
+          </Code>
+
+          <Text
+            size="xs"
+            weight="regular"
+            style={{ flex: 1, minWidth: 0 }}
+          >
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          </Text>
+        </Row>
+        <Row style={{ width: "100%" }} gap="md">
+          <Code style={{ flex: 1, minWidth: 0 }}>
+            {`<Text
+  size="md"
+  weight="medium"
+>
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+</Text>`}
+          </Code>
+
+          <Text
+            size="sm"
+            weight="medium"
+            style={{ flex: 1, minWidth: 0 }}
+          >
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          </Text>
+        </Row>
+        <Row style={{ width: "100%" }} gap="sm">
+          <Code style={{ flex: 1, minWidth: 0 }}>
+            {`<Text
+  size="md"
+  weight="semibold"
+>
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+</Text>`}
+          </Code>
+
+          <Text
+            size="md"
+            weight="semibold"
+            style={{ flex: 1, minWidth: 0 }}
+          >
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          </Text>
+        </Row>
+        <Row style={{ width: "100%" }} gap="lg">
+          <Code style={{ flex: 1, minWidth: 0 }}>
+            {`<Text
+  size="md"
+  weight="bold"
+>
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+</Text>`}
+          </Code>
+
+          <Text
+            size="lg"
+            weight="bold"
+            style={{ flex: 1, minWidth: 0 }}
+          >
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          </Text>
+        </Row>
       </TextGroup>
-
-      <Card style={{ padding: 16 }}>
-        <TextGroup>
-          <P size="sm">Text size="sm"</P>
-          <P size="md">Text size="md"</P>
-          <P size="lg">Text size="lg"</P>
-          <P size="lg" weight="bold">
-            Text size="lg" weight="bold"
-          </P>
-        </TextGroup>
-      </Card>
+      
 
       <P>
         Questo significa che cambiando i token di tipografia, tutta la

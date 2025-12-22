@@ -4,6 +4,7 @@ export { Small } from "./Small";
 export { Code } from "./Code";
 export { CodeInline } from "./CodeInline";
 export { Quote } from "./Quote";
+export { Text } from "./Text";
 export { TextGroup } from "./TextGroup";
 export { Divider } from "./Divider";
 export { Heading } from "./Heading";

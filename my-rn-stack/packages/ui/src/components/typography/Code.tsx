@@ -36,6 +36,9 @@ export function Code({
       {...rest}
       style={[
         {
+          flex: 1,          // 🔑 fondamentale
+          minWidth: 0,      // 🔑 evita overflow in row
+
           position: "relative",
           minHeight: 40, // 🔒 contratto con Button md
           borderWidth: 1,
@@ -45,8 +48,10 @@ export function Code({
 
           flexDirection: "row",
           alignItems: "center", // 🔑 allineamento verticale
+          justifyContent: "center",
           paddingHorizontal: theme.space.md,
           paddingRight: 40, // spazio riservato al copy button
+          flexWrap: "wrap",
         },
         style,
       ]}
@@ -58,11 +63,10 @@ export function Code({
         android_ripple={{ color: colors.codeBorder }}
         style={({ pressed }) => ({
           position: "absolute",
-          right: theme.space.xs,
-          top: theme.space.sm,
-          stransform: [{ translateY: -14 }],
-          height: 28,
-          width: 28,
+          right: (40 - theme.typography.lineHeight.normal * theme.typography.fontSize.sm) / 2,
+          top: (40 - theme.typography.lineHeight.normal * theme.typography.fontSize.sm) / 2,
+          height: theme.typography.fontSize.md,
+          width: theme.typography.fontSize.md,
           borderRadius: theme.radius.sm,
           alignItems: "center",
           justifyContent: "center",
@@ -83,11 +87,16 @@ export function Code({
       <Text
         style={[
           {
-            paddingVertical: theme.space.md,
+            flex: 1,          // 🔑 fondamentale
+            minWidth: 0,      // 🔑 evita overflow in row
+            flexShrink: 1,
+            padding: (40 - theme.typography.lineHeight.normal * theme.typography.fontSize.sm) / 2,
             color: colors.codeText,
             fontFamily: theme.typography.fontFamily.mono,
             fontSize: theme.typography.fontSize.sm,
-            lineHeight: theme.typography.lineHeight.md,
+            lineHeight: theme.typography.lineHeight.normal * theme.typography.fontSize.sm,
+            flexWrap: "wrap",
+            alignSelf: "center",
           },
           textStyle,
         ]}

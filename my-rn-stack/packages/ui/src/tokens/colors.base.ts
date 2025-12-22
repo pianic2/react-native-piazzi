@@ -34,6 +34,10 @@ export const lightColors = {
 
   overlay: "rgba(15, 23, 42, 0.6)",
   backdrop: "rgba(0, 0, 0, 0.4)",
+
+  codeBorder: "#E2E8F0",
+  codeBg: "#F1F5F9",
+  codeText: "#0F172A",
 } as const;
 
 export const darkColors = {
@@ -70,6 +74,10 @@ export const darkColors = {
 
   overlay: "rgba(2, 6, 23, 0.7)",
   backdrop: "rgba(0, 0, 0, 0.6)",
+
+  codeBorder: "#475569",
+  codeBg: "#0F172A",
+  codeText: "#F8FAFC",
 } as const;
 
 export type ColorScheme = "light" | "dark";

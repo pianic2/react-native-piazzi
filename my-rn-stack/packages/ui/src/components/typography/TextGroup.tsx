@@ -1,12 +1,16 @@
 import React from "react";
 import { View, ViewProps } from "react-native";
+import { useTheme } from "../../theme/useTheme";
+
+type SpaceKey = keyof ReturnType<typeof useTheme>["theme"]["space"];
 
 interface TextGroupProps extends ViewProps {
-  spacing?: number;
+  spacing?: SpaceKey;
   children: React.ReactNode;
 }
 
-export function TextGroup({ spacing = 10, children, style, ...rest }: TextGroupProps) {
+export function TextGroup({ spacing = "md", children, style, ...rest }: TextGroupProps) {
+  const { theme } = useTheme();
   const validChildren = React.Children.toArray(children).filter(Boolean);
 
   return (
@@ -14,7 +18,7 @@ export function TextGroup({ spacing = 10, children, style, ...rest }: TextGroupP
       {validChildren.map((child, index) => (
         <View
           key={index}
-          style={{ marginBottom: index === validChildren.length - 1 ? 0 : spacing }}
+          style={{ marginBottom: index === validChildren.length - 1 ? 0 : theme.space[spacing] }}
         >
           {child}
         </View>

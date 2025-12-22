@@ -7,12 +7,12 @@ import { useTheme } from "../../theme/useTheme";
 type SpaceKey = keyof ReturnType<typeof useTheme>["theme"]["space"];
 
 interface SpacerProps {
-  size?: SpaceKey;
+  spacing?: SpaceKey;
   horizontal?: boolean;
 }
 
 export function Spacer({
-  size = "md",
+  spacing = "md",
   horizontal = false,
 }: SpacerProps) {
   const { theme } = useTheme();
@@ -21,8 +21,8 @@ export function Spacer({
     <View
       style={
         horizontal
-          ? { width: theme.space[size] }
-          : { height: theme.space[size] }
+          ? { width: theme.space[spacing] }
+          : { height: theme.space[spacing] }
       }
     />
   );

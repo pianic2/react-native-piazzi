@@ -1,16 +1,17 @@
 // ui/components/typography/CodeInline.tsx
 
 import React from "react";
-import { TextProps } from "react-native";
 import { Text } from "./Text";
 import { useTheme } from "../../theme/useTheme";
+import type { ComponentProps } from "react";
 
-export function CodeInline(props: TextProps) {
+type PProps = ComponentProps<typeof Text>;
+
+export function CodeInline(props: PProps) {
   const { theme, colors } = useTheme();
 
   return (
     <Text
-      {...props}
       size="sm"
       style={[
         {
@@ -24,6 +25,7 @@ export function CodeInline(props: TextProps) {
         },
         props.style,
       ]}
+      {...props}
     />
   );
 }

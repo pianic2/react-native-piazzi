@@ -1,28 +1,18 @@
-// ui/components/typography/P.tsx
-
+import React from "react";
 import { Text } from "./Text";
-import { TextProps } from "react-native";
-import { useTheme } from "../../theme/useTheme";
+import type { ComponentProps } from "react";
 
-interface PProps extends TextProps {
-  children?: React.ReactNode;
-}
+type PProps = ComponentProps<typeof Text>;
 
-export function P({
-  style,
-  children,
-  ...rest
-}: PProps) {
-  const { theme } = useTheme();
-
+export function P(props: PProps) {
+  console.log(props);
+  
   return (
     <Text
-      {...rest}
-      style={[
-        style,
-      ]}
-    >
-      {children}
-    </Text>
+      size="md"
+      weight="regular"
+      align="justify"
+      {...props}
+    />
   );
 }
