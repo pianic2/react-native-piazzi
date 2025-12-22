@@ -1,9 +1,9 @@
 import React from "react";
-import { B, Column, Heading, Link, P, TextGroup, Divider, Card } from "ui";
+import { B, Column, Heading, Link, P, TextGroup, Divider, Card, Button } from "ui";
 
 export default function TokensIndex() {
   return (
-    <Column style={{ padding: 30 }}>
+    <Column>
       <TextGroup>
         <Heading level={1}>Design Tokens</Heading>
         <P>
@@ -16,9 +16,9 @@ export default function TokensIndex() {
 
       <TextGroup>
         <Heading level={2}>Principi chiave</Heading>
-        <Card><B>Nessun valore hardcoded nei componenti</B></Card>
-        <Card><B>Token semantici, non stilistici</B></Card>
-        <Card><B>Theming e refactor senza breaking change</B></Card>
+        <Button variant="ghost" disabled={true} label="Nessun valore hardcoded nei componenti" />
+        <Button variant="ghost" disabled={true} label="Token semantici, non stilistici" />
+        <Button variant="ghost" disabled={true} label="Theming e refactor senza breaking change" />
       </TextGroup>
 
       <TextGroup>

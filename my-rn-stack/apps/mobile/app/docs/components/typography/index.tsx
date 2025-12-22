@@ -16,7 +16,7 @@ import {
 
 export default function TypographyIndex() {
   return (
-    <Column>
+    <Column gap="xxl">
       {/* =====================================================
           INTRO
       ===================================================== */}

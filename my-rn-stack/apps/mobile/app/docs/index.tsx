@@ -26,13 +26,15 @@ export default function DocsIndex() {
   const { theme } = useTheme();
 
   return (
-    <Column style={{ padding: 30, gap: 0 }}>
-        <TextGroup>
-          <Heading level={2}>Documentazione</Heading>
-          <Link href="/docs/tokens" variant="button">Tokens</Link>
-          <Link href="/docs/theme" variant="button">Theming</Link>
-          <Link href="/docs/components/typography" variant="button">Tipografia</Link>
-        </TextGroup>
+    <Column>
+
+      <TextGroup>
+        <Heading level={2}>Documentazione</Heading>
+        <P>Esplora la documentazione completa della libreria UI per scoprire tutti i componenti, i token di design e le funzionalità di theming disponibili.</P>
+        <Link href="/docs/tokens" variant="button">Tokens</Link>
+        <Link href="/docs/theme" variant="button">Theming</Link>
+        <Link href="/docs/components/typography" variant="button">Tipografia</Link>
+      </TextGroup>
     </Column>
   );
 }

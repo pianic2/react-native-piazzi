@@ -38,7 +38,7 @@ export default function Index() {
             HERO
         =============================== */}
       <Hero>
-        <TextGroup spacing={theme.space.xl}>
+        <TextGroup spacing="lg">
           <Heading level={1}>Benvenuto in UI Library!</Heading>
 
           <Heading level={5} align="justify">
@@ -68,7 +68,7 @@ export default function Index() {
           È un design system operativo, basato su questi principi:
         </P>
 
-        <TextGroup spacing={theme.space.sm}>
+        <TextGroup spacing="sm">
           <Button variant="ghost" disabled={true} label="token centralizzati" />
           <Button variant="ghost" disabled={true} label="API esplicite" />
           <Button variant="ghost" disabled={true} label="zero comportamento “magico”" />

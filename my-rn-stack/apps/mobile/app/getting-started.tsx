@@ -24,7 +24,7 @@ export default function DocsIndex() {
   const { theme } = useTheme();
 
   return (
-    <Column style={{ padding: 30, gap: 0 }}>
+    <Column gap="lg">
       {/* ===============================
           HERO
       =============================== */}
@@ -42,7 +42,7 @@ export default function DocsIndex() {
           Requirements
       =============================== */}
       <Card>
-        <TextGroup spacing={10}>
+        <TextGroup>
           <Row>
             <Badge>1</Badge>
             <Heading level={2}>Requirements</Heading>
@@ -64,7 +64,7 @@ export default function DocsIndex() {
           Installation
       =============================== */}
       <Card>
-        <TextGroup spacing={10}>
+        <TextGroup>
           <Row>
             <Badge>2</Badge>
             <Heading level={2}>Installation</Heading>
@@ -89,13 +89,13 @@ export default function DocsIndex() {
           Theme Provider
       =============================== */}
       <Card>
-        <TextGroup spacing={10}>
+        <TextGroup>
           <Row>
             <Badge>3</Badge>
             <Heading level={2}>Theme Provider</Heading>
           </Row>
 
-          <TextGroup spacing={5}>
+          <TextGroup spacing="sm">
             <P>
               The library relies on a centralized <B>ThemeProvider</B> to manage:
             </P>
@@ -126,7 +126,7 @@ export default function RootLayout() {
   );
 }`}</Code>
 
-          <TextGroup spacing={5}>
+          <TextGroup>
             <P>By default:</P>
             <B>• safe area handling is enabled</B>
             <B>• vertical scrolling is enabled</B>
@@ -139,7 +139,7 @@ export default function RootLayout() {
           Usage
       =============================== */}
       <Card>
-        <TextGroup spacing={10}>
+        <TextGroup>
           <Row>
             <Badge>4</Badge>
             <Heading level={2}>Usage</Heading>
@@ -165,7 +165,7 @@ export default function Example() {
   );
 }`}</Code>
 
-          <TextGroup spacing={5}>
+          <TextGroup>
             <P>All components:</P>
             <B>• are fully typed</B>
             <B>• follow the design token system</B>
@@ -178,7 +178,7 @@ export default function Example() {
           Layout
       =============================== */}
       <Card>
-        <TextGroup spacing={10}>
+        <TextGroup>
           <Row>
             <Badge>5</Badge>
             <Heading level={2}>Layout</Heading>
@@ -203,7 +203,7 @@ export default function Example() {
             <Button label="Read Docs" />
           </Row>
 
-          <TextGroup spacing={5}>
+          <TextGroup>
             <P>In this case:</P>
             <B>• Code and Button share the same height</B>
             <B>• the layout remains visually consistent</B>
@@ -216,7 +216,7 @@ export default function Example() {
           Navigation
       =============================== */}
       <Card>
-        <TextGroup spacing={10}>
+        <TextGroup>
           <Row>
             <Badge>6</Badge>
             <Heading level={2}>Navigation</Heading>
@@ -226,7 +226,7 @@ export default function Example() {
             The <B>Link</B> component provides a unified navigation abstraction.
           </P>
 
-          <TextGroup spacing={5}>
+          <TextGroup>
             <P>The Link component automatically handles:</P>
             <B>• internal navigation</B>
             <B>• external links</B>
