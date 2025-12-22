@@ -11,6 +11,8 @@ import {
   Code,
   Small,
   Box,
+  Row,
+  Badge,
   B
 } from "ui";
 
@@ -74,41 +76,64 @@ export default function ThemingIndex() {
           Il theming è composto da tre livelli distinti e non accoppiati:
         </P>
 
-        <Column gap="xs" align="flex-start">
-          <B>1. Design Tokens</B>
-          <P>
-            Valori primitivi (colori, spaziature, radius, tipografia).
-            Non dipendono dal runtime.
-          </P>
-        </Column>
-        <Column gap="xs" align="flex-start">
-          <B>2. Theme</B>
-          <P>
+        <TextGroup spacing="md">
+          <Card padding="md">
+            <TextGroup>
+              <Row>
+                <Badge >1</Badge>
+                <Heading level={3}>Design Tokens</Heading>
+              </Row>
+
+              <P>
+                Valori primitivi (colori, spaziature, radius, tipografia).
+                Non dipendono dal runtime.
+              </P>
+
+            </TextGroup>
+          </Card>
+          <Card padding="md">
+            <TextGroup>
+              <Row>
+                <Badge >2</Badge>
+                <Heading level={3}>Theme</Heading>
+              </Row>
+
+              <P>
             Aggregazione semantica dei token (es. colors.primary,
             colors.text, space.md).
-          </P>
-        </Column>
-        <Column gap="xs" align="flex-start">
-          <B>3. Runtime</B>
-          <P>
+              </P>
+
+            </TextGroup>
+          </Card>
+          <Card padding="md">
+            <TextGroup>
+              <Row>
+                <Badge >3</Badge>
+                <Heading level={3}>Runtime</Heading>
+              </Row>
+
+              <P>
             Scelta del tema attivo (light / dark), persistenza e accesso
             tramite hook.
-          </P>
-        </Column>
+              </P>
+
+            </TextGroup>
+          </Card>
+        </TextGroup>
       </TextGroup>
 
-        {/* ===============================
+      {/* ===============================
           COSA NON FARE
       =============================== */}
-          <TextGroup>
-            <Heading level={3}>Cosa NON fare</Heading>
-            <P>
-              Il sistema di theming è intenzionalmente restrittivo.
-              Alcuni pattern sono considerati anti-pattern:
-            </P>
+      <TextGroup>
+        <Heading level={3}>Cosa NON fare</Heading>
+        <P>
+          Il sistema di theming è intenzionalmente restrittivo.
+          Alcuni pattern sono considerati anti-pattern:
+        </P>
 
-            <Code>
-              {`// ❌ vietato
+        <Code>
+          {`// ❌ vietato
 <View style={{ backgroundColor: "#ffffff" }} />
 
 // ❌ vietato
@@ -116,53 +141,53 @@ const color = dark ? "#000" : "#fff";
 
 // ❌ vietato
 style={{ margin: 12 }}`}
-            </Code>
+        </Code>
 
-            <Small>
-              Se un valore non esiste nei token, va aggiunto ai token.
-            </Small>
-          </TextGroup>
+        <Small>
+          Se un valore non esiste nei token, va aggiunto ai token.
+        </Small>
+      </TextGroup>
 
-        {/* ===============================
+      {/* ===============================
           ENTRY POINT
       =============================== */}
-        <TextGroup>
-          <Heading level={2}>Entry point</Heading>
-          <P>
-            Il theming è sempre inizializzato a livello applicazione.
-            Tutti i componenti assumono che il ThemeProvider sia presente.
-          </P>
+      <TextGroup>
+        <Heading level={2}>Entry point</Heading>
+        <P>
+          Il theming è sempre inizializzato a livello applicazione.
+          Tutti i componenti assumono che il ThemeProvider sia presente.
+        </P>
 
-          <Link href="/docs/theme/theme-provider" variant="button">
-            ThemeProvider
-          </Link>
-          <Link href="/docs/theme/use-theme" variant="button">
-            useTheme
-          </Link>
-          <Link href="/docs/theme/default-theme" variant="button">
-            Tema di default
-          </Link>
-        </TextGroup>
+        <Link href="/docs/theme/theme-provider" variant="button">
+          ThemeProvider
+        </Link>
+        <Link href="/docs/theme/use-theme" variant="button">
+          useTheme
+        </Link>
+        <Link href="/docs/theme/default-theme" variant="button">
+          Tema di default
+        </Link>
+      </TextGroup>
 
-        <Divider />
+      <Divider />
 
-        {/* ===============================
+      {/* ===============================
           NEXT STEPS
       =============================== */}
-        <TextGroup>
-          <Heading level={3}>Prossimi step</Heading>
-          <P>
-            Se stai iniziando ora:
-          </P>
+      <TextGroup>
+        <Heading level={3}>Prossimi step</Heading>
+        <P>
+          Se stai iniziando ora:
+        </P>
 
-          <P>1. Integra il ThemeProvider nel layout root.</P>
-          <P>2. Usa <B>useTheme()</B> in ogni componente.</P>
-          <P>3. Aggiungi nuovi valori solo tramite design tokens.</P>
+        <P>1. Integra il ThemeProvider nel layout root.</P>
+        <P>2. Usa <B>useTheme()</B> in ogni componente.</P>
+        <P>3. Aggiungi nuovi valori solo tramite design tokens.</P>
 
-          <Small>
-            Questa disciplina è ciò che rende la libreria stabile nel tempo.
-          </Small>
-        </TextGroup>
+        <Small>
+          Questa disciplina è ciò che rende la libreria stabile nel tempo.
+        </Small>
+      </TextGroup>
     </Column>
   );
 }

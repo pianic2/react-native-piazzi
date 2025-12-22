@@ -9,11 +9,15 @@ type Variant = "primary" | "success" | "warning" | "danger" | "info";
 
 interface BadgeProps extends TextProps {
   children: React.ReactNode;
+  size?: keyof ReturnType<typeof useTheme>["theme"]["typography"]["fontSize"];
+
   variant?: Variant;
 }
 
+
 export function Badge({
   children,
+  size = "md",
   variant = "primary",
   style,
   ...rest
@@ -37,7 +41,8 @@ export function Badge({
     backgroundColor: backgroundMap[variant],
     borderRadius: theme.radius.full,
     paddingHorizontal: theme.space.md,
-    paddingVertical: theme.space.sm,
+    paddingVertical: theme.space.sm / 2,
+    fontSize: theme.typography.fontSize[size],
   };
 
   // ===============================
@@ -53,7 +58,6 @@ export function Badge({
           {
             color: textColor,
             marginRight: theme.space.sm,
-            display: "inline-flex",
             alignItems: "center",
           },
           style,
@@ -82,7 +86,6 @@ export function Badge({
             {
               color: textColor,
               textAlignVertical: "center",
-              padding: theme.space.sm,
             },
             style,
           ]}

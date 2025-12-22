@@ -7,6 +7,7 @@ import {
   Platform,
 } from "react-native";
 import { useTheme } from "../theme/useTheme";
+import { shadows, Shadow } from "../tokens/shadows.base";
 
 interface CardProps {
   children?: React.ReactNode;
@@ -14,8 +15,8 @@ interface CardProps {
   bgColor?: string;
   radius?: number;
   padding?: number;
-  elevation?: number;
   variant?: "default" | "elevated" | "outline";
+  shadow?: Shadow;
 }
 
 export function Card({
@@ -24,10 +25,18 @@ export function Card({
   bgColor,
   radius = 14,
   padding = 16,
-  elevation = 2,
   variant = "default",
+  shadow,
 }: CardProps) {
-  const { colors } = useTheme();
+  const { theme, colors } = useTheme();
+
+  const resolvedShadow: Shadow =
+    shadow ??
+    (variant === "outline"
+      ? "none"
+      : variant === "elevated"
+      ? "md"
+      : "md");
 
   const cardBackground =
     bgColor ||
@@ -45,10 +54,10 @@ export function Card({
 
         variant === "outline" && {
           borderWidth: 1,
-          borderColor: colors.primary.border,
+          borderColor: colors.border,
         },
 
-        variant !== "outline" && generateShadow(elevation),
+        applyShadow(resolvedShadow),
 
         style,
       ]}
@@ -58,19 +67,24 @@ export function Card({
   );
 }
 
-function generateShadow(elevation: number): ViewStyle {
+/**
+ * Applica shadow token in modo cross-platform
+ */
+function applyShadow(shadow: Shadow): ViewStyle {
+  const { theme, colors } = useTheme();
+
   if (Platform.OS === "android") {
     return {
-      elevation,
+      elevation: theme.shadows[shadow].elevation,
     };
   }
 
-  // iOS shadow
+  // iOS / Web
   return {
-    shadowColor: "#000",
-    shadowOpacity: 0.12,
-    shadowRadius: elevation * 2,
-    shadowOffset: { width: 0, height: elevation },
+    shadowColor: theme.shadows[shadow].shadowColor,
+    shadowOffset: theme.shadows[shadow].shadowOffset,
+    shadowOpacity: theme.shadows[shadow].shadowOpacity,
+    shadowRadius: theme.shadows[shadow].shadowRadius,
   };
 }
 
