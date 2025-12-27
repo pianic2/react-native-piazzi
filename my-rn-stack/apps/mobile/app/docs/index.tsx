@@ -29,12 +29,17 @@ export default function DocsIndex() {
     <Column>
 
       <TextGroup>
-        <Heading level={2}>Documentazione</Heading>
+        <Heading level={1}>Documentazione</Heading>
         <P>Esplora la documentazione completa della libreria UI per scoprire tutti i componenti, i token di design e le funzionalità di theming disponibili.</P>
+      </TextGroup>
+
+      <TextGroup>
+        <Heading level={3}>Elenco delle Categorie:</Heading>
         <Link href="/docs/tokens" variant="button">Tokens</Link>
         <Link href="/docs/theme" variant="button">Theming</Link>
         <Link href="/docs/components/typography" variant="button">Tipografia</Link>
       </TextGroup>
+
     </Column>
   );
 }

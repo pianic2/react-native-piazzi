@@ -1,5 +1,5 @@
 import React from "react";
-import { B, Column, Heading, Link, P, TextGroup, Divider, Card, Button } from "ui";
+import { B, Column, Row, Heading, Link, P, TextGroup, Divider, Card, Button } from "ui";
 
 export default function TokensIndex() {
   return (
@@ -11,7 +11,6 @@ export default function TokensIndex() {
           Definiscono colori, spaziature, tipografia, ombre e layering in modo
           centralizzato e scalabile.
         </P>
-        <Divider />
       </TextGroup>
 
       <TextGroup>
@@ -30,6 +29,10 @@ export default function TokensIndex() {
         <Link href="/docs/tokens/typography" variant="button">Typography</Link>
         <Link href="/docs/tokens/zIndex" variant="button">Z-Index</Link>
       </TextGroup>
+
+      <Row justify="flex-end">
+        <Link href="/docs/theme" variant="button" size="lg">Theming</Link>
+      </Row>
     </Column>
   );
 }

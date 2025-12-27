@@ -19,6 +19,7 @@ const NAV_ITEMS = [
 ];
 
 export default function RootLayout() {
+  
   return (
     <ThemeProvider withScroll={false}>
 
@@ -28,7 +29,7 @@ export default function RootLayout() {
       </Page>
 
       <NavBar
-        logo={<Logo size={40}/>}
+        logo={<Logo size={30}/>}
         items={NAV_ITEMS}
         bottomMaxItems={4}
         sidebarWidth={260}

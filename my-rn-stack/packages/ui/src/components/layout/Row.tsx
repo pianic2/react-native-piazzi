@@ -23,7 +23,7 @@ interface RowProps extends ViewProps {
 
 export function Row({
   gap = "md",
-  align = "flex-start",
+  align = "center",
   justify = "flex-start",
   wrap = false,
   style,

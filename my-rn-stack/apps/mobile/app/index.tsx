@@ -38,7 +38,7 @@ export default function Index() {
             HERO
         =============================== */}
       <Hero>
-        <TextGroup spacing="lg">
+        <TextGroup>
           <Heading level={1}>Benvenuto in UI Library!</Heading>
 
           <Heading level={5} align="justify">

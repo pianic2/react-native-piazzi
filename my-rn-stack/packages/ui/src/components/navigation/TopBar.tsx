@@ -29,21 +29,21 @@ export function TopBar({ title, leftSlot, centerSlot, rightSlot }: TopBarProps) 
     <Box
       bg="surface"
       style={{
-        position: "fixed",
+        position: "absolute",
         top: 0,
-        width: "100vw",
         borderBottomWidth: 1,
+        width: '100%',
         borderBottomColor: colors.border,
-        paddingHorizontal: theme.space.xl,
+        paddingHorizontal: theme.space.lg,
         paddingVertical: theme.space.lg,
       }}
     >
-      <Row justify="space-between" align="center" wrap={false}>
+      <Row justify="space-between" align="center" wrap={false} style={{ height: 40 }}>
         {/* LEFT */}
-        { logo ? <Row gap="md">{logo}{title ? <Text weight="bold" size="xl">{title}</Text> : null}{leftSlot}</Row> : <Text>a</Text>}
+        { logo ? <Row gap="md">{logo}{title ? <Text weight="bold" size="sm">{title}</Text> : null}{leftSlot}</Row> : <Text>a</Text>}
 
         {/* CENTER */}
-        <Box gap="lg" style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+        <Box style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
           {centerSlot ? (
             centerSlot
           ) : (
@@ -54,8 +54,8 @@ export function TopBar({ title, leftSlot, centerSlot, rightSlot }: TopBarProps) 
                   key={it.href}
                   href={it.href}
                   underline={false}
-                  activeStyle={{ fontWeight: "700", color: colors.primary }}
-                  style={{ flex: 1, alignSelf:"center", color: active ? colors.primary : colors.textSecondary, width: 80, textAlign: "center", fontSize: theme.typography.fontSize.lg }}
+                  activeStyle={{ fontWeight: theme.typography.fontWeight.bold, color: colors.primary }}
+                  style={{ flex: 1, alignSelf:"center", color: active ? colors.primary : colors.textSecondary, width: 90, textAlign: "center", fontSize: theme.typography.fontSize.lg }}
                 >
                   {it.label}
                 </Link>

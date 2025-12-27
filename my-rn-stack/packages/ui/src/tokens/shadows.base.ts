@@ -19,7 +19,7 @@ export const shadows = {
 
   md: {
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
+    shadowOffset: { width: 3, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 6,
     elevation: 3,
@@ -27,7 +27,7 @@ export const shadows = {
 
   lg: {
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 6 },
+    shadowOffset: { width: 3, height: 6 },
     shadowOpacity: 0.2,
     shadowRadius: 12,
     elevation: 6,

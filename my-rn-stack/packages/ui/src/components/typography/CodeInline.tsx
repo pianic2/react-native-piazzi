@@ -11,21 +11,24 @@ export function CodeInline(props: PProps) {
   const { theme, colors } = useTheme();
 
   return (
-    <Text
-      size="sm"
-      style={[
-        {
-          fontFamily: theme.typography.fontFamily.mono,
-          backgroundColor: colors.surface,
-          borderColor: colors.border,
-          borderWidth: 1,
-          borderRadius: theme.radius.sm,
-          paddingHorizontal: theme.space.sm,
-          paddingVertical: 1,
-        },
-        props.style,
-      ]}
-      {...props}
-    />
+      <Text
+        size={props.size}
+        style={[
+          {
+            fontFamily: theme.typography.fontFamily.mono,
+            backgroundColor: colors.surface,
+            borderColor: colors.border,
+            borderWidth: 1,
+            borderRadius: theme.radius.sm,
+            paddingHorizontal: theme.space.sm,
+            paddingVertical: 0,
+            lineHeight:
+              theme.typography.fontSize[props.size] *
+              theme.typography.lineHeight.normal,
+            },
+          props.style,
+        ]}
+        {...props}
+      />
   );
 }

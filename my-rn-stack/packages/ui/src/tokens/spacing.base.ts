@@ -2,7 +2,7 @@
 
 export const spacing = {
   0: 0,
-  5: 5,
+  4: 4,
   8: 8,
   12: 12,
   20: 20,
@@ -14,9 +14,10 @@ export type Spacing = keyof typeof spacing;
 
 // Alias semantici (consigliati nei componenti)
 export const space = {
-  xs: spacing[0],
-  sm: spacing[5],
-  md: spacing[8],
+  none: spacing[0],
+  xs: spacing[4],
+  sm: spacing[8],
+  md: spacing[12],
   lg: spacing[20],
   xl: spacing[30],
   xxl: spacing[80],

@@ -3,13 +3,17 @@ import { Column, Heading, P, TextGroup, Divider, Card, Code, Row, Link } from "u
 
 export default function ShadowsDocs() {
   return (
-    <Column style={{ padding: 30 }}>
+    <Column>
       <TextGroup>
         <Heading level={1}>Shadows</Heading>
         <P>
-        Le shadow rappresentano livelli di elevazione,
-        non decorazioni casuali.
+          Le shadow rappresentano livelli di elevazione,
+          non decorazioni casuali.
         </P>
+      </TextGroup>
+
+      <TextGroup>
+        <Heading level={2}>Struttura</Heading>
         <Code>{`// src/tokens/shadows.base.ts
 
 export const shadows = {
@@ -48,11 +52,11 @@ export const shadows = {
 
 export type Shadow = keyof typeof shadows;
 `}</Code>
-        </TextGroup>
+      </TextGroup>
 
       <Row justify="space-between">
+        <Link href="/docs/tokens/radius" variant="button" size="lg">Radius</Link>
         <Link href="/docs/tokens/spacing" variant="button" size="lg">Spacing</Link>
-        <Link href="/docs/tokens/typography" variant="button" size="lg">Typography</Link>
       </Row>
     </Column>
   );

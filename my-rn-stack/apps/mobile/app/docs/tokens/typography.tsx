@@ -3,13 +3,17 @@ import { Column, Heading, P, TextGroup, Divider, Card, Code, Row, Link } from "u
 
 export default function TypographyDocs() {
   return (
-    <Column style={{ padding: 30 }}>
+    <Column>
       <TextGroup>
         <Heading level={1}>Typography</Heading>
         <P>
           La tipografia è semantica.
           I componenti mappano direttamente i token tipografici.
         </P>
+      </TextGroup>
+
+      <TextGroup>
+        <Heading level={2}>Struttura</Heading>
         <Code>{`// src/tokens/typography.base.ts
 
 export const fontFamily = {
@@ -48,6 +52,7 @@ export const typography = {
 } as const;
 `}</Code>
       </TextGroup>
+      
       <Row justify="space-between">
         <Link href="/docs/tokens/spacing" variant="button" size="lg">Spacing</Link>
         <Link href="/docs/tokens/zIndex" variant="button" size="lg">Z-Index</Link>

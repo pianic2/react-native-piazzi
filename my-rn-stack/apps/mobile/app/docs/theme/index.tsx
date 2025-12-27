@@ -77,10 +77,10 @@ export default function ThemingIndex() {
         </P>
 
         <TextGroup spacing="md">
-          <Card padding="md">
+          <Card>
             <TextGroup>
               <Row>
-                <Badge >1</Badge>
+                <Badge>1</Badge>
                 <Heading level={3}>Design Tokens</Heading>
               </Row>
 
@@ -91,30 +91,30 @@ export default function ThemingIndex() {
 
             </TextGroup>
           </Card>
-          <Card padding="md">
+          <Card>
             <TextGroup>
               <Row>
-                <Badge >2</Badge>
+                <Badge>2</Badge>
                 <Heading level={3}>Theme</Heading>
               </Row>
 
               <P>
-            Aggregazione semantica dei token (es. colors.primary,
-            colors.text, space.md).
+                Aggregazione semantica dei token (es. colors.primary,
+                colors.text, space.md).
               </P>
 
             </TextGroup>
           </Card>
-          <Card padding="md">
+          <Card>
             <TextGroup>
               <Row>
-                <Badge >3</Badge>
+                <Badge>3</Badge>
                 <Heading level={3}>Runtime</Heading>
               </Row>
 
               <P>
-            Scelta del tema attivo (light / dark), persistenza e accesso
-            tramite hook.
+                Scelta del tema attivo (light / dark), persistenza e accesso
+                tramite hook.
               </P>
 
             </TextGroup>
@@ -126,7 +126,7 @@ export default function ThemingIndex() {
           COSA NON FARE
       =============================== */}
       <TextGroup>
-        <Heading level={3}>Cosa NON fare</Heading>
+        <Heading level={2}>Cosa NON fare</Heading>
         <P>
           Il sistema di theming è intenzionalmente restrittivo.
           Alcuni pattern sono considerati anti-pattern:
@@ -157,7 +157,10 @@ style={{ margin: 12 }}`}
           Il theming è sempre inizializzato a livello applicazione.
           Tutti i componenti assumono che il ThemeProvider sia presente.
         </P>
+      </TextGroup>
 
+      <TextGroup>
+        <Heading level={3}>Elenco dei Componenti</Heading>
         <Link href="/docs/theme/theme-provider" variant="button">
           ThemeProvider
         </Link>
@@ -167,26 +170,6 @@ style={{ margin: 12 }}`}
         <Link href="/docs/theme/default-theme" variant="button">
           Tema di default
         </Link>
-      </TextGroup>
-
-      <Divider />
-
-      {/* ===============================
-          NEXT STEPS
-      =============================== */}
-      <TextGroup>
-        <Heading level={3}>Prossimi step</Heading>
-        <P>
-          Se stai iniziando ora:
-        </P>
-
-        <P>1. Integra il ThemeProvider nel layout root.</P>
-        <P>2. Usa <B>useTheme()</B> in ogni componente.</P>
-        <P>3. Aggiungi nuovi valori solo tramite design tokens.</P>
-
-        <Small>
-          Questa disciplina è ciò che rende la libreria stabile nel tempo.
-        </Small>
       </TextGroup>
     </Column>
   );

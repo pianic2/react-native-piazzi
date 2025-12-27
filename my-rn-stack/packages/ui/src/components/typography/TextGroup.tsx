@@ -9,7 +9,7 @@ interface TextGroupProps extends ViewProps {
   children: React.ReactNode;
 }
 
-export function TextGroup({ spacing = "md", children, style, ...rest }: TextGroupProps) {
+export function TextGroup({ spacing = "sm", children, style, ...rest }: TextGroupProps) {
   const { theme } = useTheme();
   const validChildren = React.Children.toArray(children).filter(Boolean);
 

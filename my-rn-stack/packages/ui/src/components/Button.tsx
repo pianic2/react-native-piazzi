@@ -6,7 +6,7 @@ import { LucideIcon } from "lucide-react-native";
 import { useTheme } from "../theme/useTheme";
 
 type Variant = "primary" | "ghost" | "danger" | "info";
-type Size = "sm" | "md" | "lg";
+type Size = "xs" | "sm" | "md" | "lg";
 
 interface ButtonProps {
   icon?: LucideIcon;
@@ -17,7 +17,7 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export default function Button({
+export function Button({
   icon: Icon,
   label,
   onPress,
@@ -28,18 +28,21 @@ export default function Button({
   const { theme, colors } = useTheme();
 
   const heightMap = {
+    xs: 28,
     sm: 32,
     md: 40,
     lg: 48,
   };
 
   const iconSizeMap = {
+    xs: 12,
     sm: 16,
     md: 20,
     lg: 24,
   };
 
   const horizontalPadding = {
+    xs: 8,
     sm: 12,
     md: 16,
     lg: 20,

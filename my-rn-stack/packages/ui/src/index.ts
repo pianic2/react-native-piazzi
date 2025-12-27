@@ -6,7 +6,7 @@
 export * from "./components/navigation/index";
 
 // Base UI
-export { default as Button } from "./components/Button";
+export { Button } from "./components/Button";
 
 
 

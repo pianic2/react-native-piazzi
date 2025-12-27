@@ -38,25 +38,26 @@ export function Alert({
         backgroundColor: bgMap[variant],
         borderRadius: theme.radius.md,
         padding: theme.space.md,
+        gap: theme.space.xs,
       }}
     >
       {title && (
-        <Text weight="bold" style={{ color: colors.textInverted }}>
+        <Text weight="bold" style={{ color: colors.textInverted }} align="left">
           {title}
         </Text>
       )}
 
-      <Text style={{ color: colors.textInverted }}>
+      <Text style={{ color: colors.textInverted }} align="left">
         {message}
       </Text>
 
       {actionLabel && onAction && (
         <Button
+          size="sm"
           variant="ghost"
           onPress={onAction}
-        >
-          {actionLabel}
-        </Button>
+          label={actionLabel}
+        />
       )}
     </View>
   );

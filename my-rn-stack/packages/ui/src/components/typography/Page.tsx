@@ -21,7 +21,7 @@ export function Page({ style, ...props }: PageProps) {
   return (
     <ScrollView
       {...props}
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: theme.colors.background }}
       contentContainerStyle={[
         {
           paddingTop: isWeb ? 3 * theme.space.lg + 40 : theme.space.lg,

@@ -90,7 +90,7 @@ export function Code({
             flex: 1,          // 🔑 fondamentale
             minWidth: 0,      // 🔑 evita overflow in row
             flexShrink: 1,
-            padding: (40 - theme.typography.lineHeight.normal * theme.typography.fontSize.sm) / 2,
+            paddingVertical: (40 - theme.typography.lineHeight.normal * theme.typography.fontSize.sm) / 2,
             color: colors.codeText,
             fontFamily: theme.typography.fontFamily.mono,
             fontSize: theme.typography.fontSize.sm,

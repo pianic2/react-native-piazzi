@@ -1,47 +1,64 @@
 import React from "react";
-import { Column, Heading, P, TextGroup, Divider, Card, Code, CodeInline } from "ui";
+import { Column, Heading, P, Link, TextGroup, Divider, Card, Code, CodeInline, Row, useTheme } from "ui";
 
 export default function UseThemeDocs() {
+  const { colors } = useTheme();
+
   return (
-    <Column style={{ padding: 30 }}>
+    <Column>
       <TextGroup>
         <Heading level={1}>useTheme</Heading>
         <P>
-          Hook di accesso al contesto del tema.
-          È l’unico modo corretto per leggere colori e token runtime.
+          È il Hook di accesso al contesto del tema.
+          È l’unico modo corretto per leggere i token runtime e cambiare modalità.
         </P>
       </TextGroup>
 
-        <TextGroup>
-          <Heading level={3}>Utilizzo</Heading>
-          <Code>{`import { ThemeProvider, useTheme } from "ui";
+      <TextGroup>
+        <Heading level={2}>Utilizzo</Heading>
+        <P>Importa il hook <CodeInline>useTheme</CodeInline> e utilizzalo all'interno dei componenti per accedere al <CodeInline>ThemeContext</CodeInline>.</P>
+        <Code>{`import { P, useTheme } from "ui";
 
 export default function RootLayout() {
-  const { theme, mode, toggleTheme } = useTheme();
+  const { theme, mode, colors, toggleTheme } = useTheme();
 
   return (
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+      <P style={{ color: colors.primary }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </P>
+
   );
 }`}</Code>
-        </TextGroup>
-
-      <TextGroup>
-        <Heading level={3}>Cosa espone</Heading>
-        <P>• <CodeInline>theme</CodeInline>: tema risolto</P>
-        <P>• <CodeInline>mode</CodeInline>: <CodeInline>light</CodeInline> | <CodeInline>dark</CodeInline></P>
-        <P>• <CodeInline>toggleTheme</CodeInline> / setMode</P>
+        <P style={{ color: colors.primary, }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</P>
       </TextGroup>
 
-      <Card>
-        <TextGroup>
-          <Heading level={3}>Regola</Heading>
-          <P>
-            Se un componente usa colori o spacing, deve usare <Code>useTheme</Code>.
-          </P>
-        </TextGroup>
-      </Card>
+      {/* ===============================
+          COSA ESPONE
+      =============================== */}
+      <TextGroup>
+        <Heading level={2}>Cosa espone</Heading>
+        <P>Di seguito sono riportati i token esposti dal contesto del tema:</P>
+        <Row>
+          <Row justify="flex-end" style={{ width: 220 }}><CodeInline size="sm" align="right">{"theme"}</CodeInline></Row>
+          <P>tema risolto</P>
+        </Row>
+        <Row>
+          <Row justify="flex-end" style={{ width: 220 }}><CodeInline size="sm" align="right">{"mode: light | dark"}</CodeInline></Row>
+          <P>Modalità corrente</P>
+        </Row>
+        <Row>
+          <Row justify="flex-end" style={{ width: 220 }}><CodeInline size="sm" align="right">{"colors"}</CodeInline></Row>
+          <P>Scorciatoia per i colori della libreria</P>
+        </Row>
+        <Row>
+          <Row justify="flex-end" style={{ width: 220 }}><CodeInline size="sm" align="right">{"toggleTheme"}</CodeInline></Row>
+          <P>Permette di cambiare tra <CodeInline>light</CodeInline> e <CodeInline>dark</CodeInline></P>
+        </Row>
+      </TextGroup>
+
+      <Row justify="flex-end">
+        <Link href="/docs/theme/default-theme" variant="button" size="lg">Tema di Default</Link>
+      </Row>
     </Column>
   );
 }

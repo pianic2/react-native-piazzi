@@ -3,12 +3,12 @@ import { Column, Heading, P, TextGroup, Divider, Card, Code, Row, Link } from "u
 
 export default function ZIndexDocs() {
   return (
-    <Column style={{ padding: 30 }}>
+    <Column>
       <TextGroup>
         <Heading level={1}>Z-Index</Heading>
         <P>
-        Il sistema di z-index è globale e contrattuale.
-                  Evita conflitti e bug invisibili.
+          Il sistema di z-index è globale e contrattuale.
+          Evita conflitti e bug invisibili.
         </P>
         <Code>{`// src/tokens/zIndex.base,ts
 
@@ -25,9 +25,10 @@ export const zIndex = {
 export type ZIndex = keyof typeof zIndex;
 `}</Code>
       </TextGroup>
+
       <Row justify="space-between">
         <Link href="/docs/tokens/typography" variant="button" size="lg">Typography</Link>
-        <Link href="/docs" variant="button" size="lg">Read Docs</Link>
+        <Link href="/docs/tokens" variant="button" size="lg">Tokens Docs</Link>
       </Row>
     </Column>
   );

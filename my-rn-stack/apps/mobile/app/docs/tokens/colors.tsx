@@ -3,14 +3,13 @@ import { Column, Heading, P, TextGroup, Divider, Card, Code, Link, Row } from "u
 
 export default function ColorsDocs() {
   return (
-    <Column style={{ padding: 30 }}>
+    <Column>
       <TextGroup>
         <Heading level={1}>Colors</Heading>
         <P>
           I token di colore definiscono il linguaggio visivo della UI.
           I componenti non usano mai colori diretti, ma solo token semantici.
         </P>
-        <Divider />
       </TextGroup>
 
       <TextGroup>
@@ -19,7 +18,9 @@ export default function ColorsDocs() {
           I colori sono organizzati per ruolo:
           di seguito sono riportati tutti i tokens che la libreria mette a disposizione.
         </P>
-        <Code>{`export const lightColors = {
+        <Code>{`// src/tokens/colors.base.ts
+
+export const lightColors = {
   primary: "#5B7CFF",
   primaryHover: "#4A6BEE",
   primaryActive: "#3A5ADD",

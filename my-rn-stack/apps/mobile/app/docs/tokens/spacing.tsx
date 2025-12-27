@@ -3,13 +3,17 @@ import { Column, Heading, P, TextGroup, Divider, Card, Code, Row, Link } from "u
 
 export default function SpacingDocs() {
   return (
-    <Column style={{ padding: 30 }}>
+    <Column>
       <TextGroup>
         <Heading level={1}>Spacing</Heading>
         <P>
-        I token di spacing definiscono padding, margin e gap.
-        Eliminano i numeri magici e rendono i layout coerenti.
+          I token di spacing definiscono padding, margin e gap.
+          Eliminano i numeri magici e rendono i layout coerenti.
         </P>
+      </TextGroup>
+
+      <TextGroup>
+        <Heading level={2}>Struttura</Heading>
         <Code>{`// src/tokens/spacing.base.ts
 
 export const spacing = {
@@ -34,11 +38,11 @@ export const space = {
   xxl: spacing[80],
 } as const;
 `}</Code>
-        </TextGroup>
+      </TextGroup>
 
       <Row justify="space-between">
-        <Link href="/docs/tokens/radius" variant="button" size="lg">Radius</Link>
         <Link href="/docs/tokens/shadow" variant="button" size="lg">Shadow</Link>
+        <Link href="/docs/tokens/typography" variant="button" size="lg">Typography</Link>
       </Row>
     </Column>
   );

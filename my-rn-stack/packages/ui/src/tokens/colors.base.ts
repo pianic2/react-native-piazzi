@@ -17,10 +17,10 @@ export const lightColors = {
   info: "#2563EB",
 
   background: "#FFFFFF",
-  surface: "#F8F9FB",
+  surface: "#F4F4F4",
   surfaceElevated: "#FFFFFF",
 
-  textPrimary: "#0F172A",
+  textPrimary: "#020408ff",
   textSecondary: "#475569",
   textMuted: "#94A3B8",
   textInverted: "#FFFFFF",

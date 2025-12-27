@@ -40,3 +40,5 @@ export interface Theme {
     };
   };
 }
+
+export type ThemeMode = "light" | "dark";

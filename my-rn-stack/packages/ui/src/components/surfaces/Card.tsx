@@ -1,40 +1,95 @@
-// ui/components/surfaces/Card.tsx
-
 import React from "react";
-import { ViewProps } from "react-native";
-import { Box } from "../layout/Box";
+import {
+  View,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+  Platform,
+} from "react-native";
 import { useTheme } from "../../theme/useTheme";
+import { shadows, Shadow } from "../../tokens/shadows.base";
 
-type Variant = "flat" | "elevated";
-
-interface CardProps extends ViewProps {
-  variant?: Variant;
+interface CardProps {
+  children?: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+  bgColor?: string;
+  radius?: number;
   padding?: keyof ReturnType<typeof useTheme>["theme"]["space"];
+  variant?: "default" | "elevated" | "outline";
+  shadow?: Shadow;
 }
 
 export function Card({
-  variant = "flat",
-  padding,
-  style,
   children,
-  ...rest
+  style,
+  bgColor,
+  radius = 14,
+  padding = "md",
+  variant = "default",
+  shadow,
 }: CardProps) {
-  const { theme } = useTheme();
+  const { theme, colors } = useTheme();
+
+  const resolvedShadow: Shadow =
+    shadow ??
+    (variant === "outline"
+      ? "none"
+      : variant === "elevated"
+      ? "md"
+      : "sm");
+
+  const cardBackground =
+    bgColor ||
+    (variant === "outline" ? "transparent" : colors.surface);
 
   return (
-    <Box
-      {...rest}
-      bg="surface"
-      padding={padding ?? "lg"}
-      radius="lg"
-      shadow={
-        variant === "elevated"
-          ? "sm"
-          : undefined
-      }
-      style={style}
+    <View
+      style={[
+        styles.base,
+        {
+          backgroundColor: cardBackground,
+          borderRadius: radius,
+          padding: theme.space[padding],
+        },
+
+        variant === "outline" && {
+          borderWidth: 1,
+          borderColor: colors.border,
+        },
+
+        applyShadow(resolvedShadow),
+
+        style,
+      ]}
     >
       {children}
-    </Box>
+    </View>
   );
 }
+
+/**
+ * Applica shadow token in modo cross-platform
+ */
+function applyShadow(shadow: Shadow): ViewStyle {
+  const { theme } = useTheme();
+
+  if (Platform.OS === "android") {
+    return {
+      elevation: theme.shadows[shadow].elevation,
+    };
+  }
+
+  // iOS / Web
+  return {
+    shadowColor: theme.shadows[shadow].shadowColor,
+    shadowOffset: theme.shadows[shadow].shadowOffset,
+    shadowOpacity: theme.shadows[shadow].shadowOpacity,
+    shadowRadius: theme.shadows[shadow].shadowRadius,
+  };
+}
+
+const styles = StyleSheet.create({
+  base: {
+    width: "100%",
+  },
+});
