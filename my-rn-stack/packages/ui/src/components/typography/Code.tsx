@@ -25,6 +25,13 @@ export function Code({
   const { theme, colors } = useTheme();
   const [copied, setCopied] = useState(false);
 
+  const fontSize = theme.typography.fontSize.sm;
+  const lineHeight =
+    theme.typography.lineHeight.normal * fontSize;
+
+  const CONTAINER_HEIGHT = 40;
+  const ICON_SIZE = 14;
+
   async function handleCopy() {
     await copyToClipboard(String(children));
     setCopied(true);
@@ -36,22 +43,19 @@ export function Code({
       {...rest}
       style={[
         {
-          flex: 1,          // 🔑 fondamentale
-          minWidth: 0,      // 🔑 evita overflow in row
+          minWidth: 0,
+          minHeight: CONTAINER_HEIGHT,
 
           position: "relative",
-          minHeight: 40, // 🔒 contratto con Button md
           borderWidth: 1,
           borderRadius: theme.radius.md,
           borderColor: colors.codeBorder,
           backgroundColor: colors.codeBg,
 
           flexDirection: "row",
-          alignItems: "center", // 🔑 allineamento verticale
-          justifyContent: "center",
+          alignItems: "flex-start",
           paddingHorizontal: theme.space.md,
-          paddingRight: 40, // spazio riservato al copy button
-          flexWrap: "wrap",
+          paddingRight: 40,
         },
         style,
       ]}
@@ -63,10 +67,10 @@ export function Code({
         android_ripple={{ color: colors.codeBorder }}
         style={({ pressed }) => ({
           position: "absolute",
-          right: (40 - theme.typography.lineHeight.normal * theme.typography.fontSize.sm) / 2,
-          top: (40 - theme.typography.lineHeight.normal * theme.typography.fontSize.sm) / 2,
-          height: theme.typography.fontSize.md,
-          width: theme.typography.fontSize.md,
+          right: (40 - ICON_SIZE) / 2,
+          top: (CONTAINER_HEIGHT - ICON_SIZE) / 2,
+          height: ICON_SIZE,
+          width: ICON_SIZE,
           borderRadius: theme.radius.sm,
           alignItems: "center",
           justifyContent: "center",
@@ -77,9 +81,9 @@ export function Code({
         })}
       >
         {copied ? (
-          <Check size={14} color={colors.codeText} />
+          <Check size={ICON_SIZE} color={colors.codeText} />
         ) : (
-          <Copy size={14} color={colors.codeText} />
+          <Copy size={ICON_SIZE} color={colors.codeText} />
         )}
       </Pressable>
 
@@ -87,16 +91,14 @@ export function Code({
       <Text
         style={[
           {
-            flex: 1,          // 🔑 fondamentale
-            minWidth: 0,      // 🔑 evita overflow in row
+            minWidth: 0,
             flexShrink: 1,
-            paddingVertical: (40 - theme.typography.lineHeight.normal * theme.typography.fontSize.sm) / 2,
+            paddingVertical: (CONTAINER_HEIGHT - lineHeight) / 2,
             color: colors.codeText,
             fontFamily: theme.typography.fontFamily.mono,
-            fontSize: theme.typography.fontSize.sm,
-            lineHeight: theme.typography.lineHeight.normal * theme.typography.fontSize.sm,
+            fontSize,
+            lineHeight,
             flexWrap: "wrap",
-            alignSelf: "center",
           },
           textStyle,
         ]}

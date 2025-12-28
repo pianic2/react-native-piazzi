@@ -44,7 +44,7 @@ export default function ThemeProviderDocs() {
       =============================== */}
       <TextGroup>
         <Heading level={2}>Parametri</Heading>
-        <P>I parametri del ThemeProvider sono definiti in <CodeInline><CodeInline/> </P>
+        <P>I parametri del ThemeProvider sono definiti in <CodeInline>ok</CodeInline> </P>
         <Row>
           <Row justify="flex-end" style={{ width: 220 }}><CodeInline size="sm" align="right">initialMode</CodeInline></Row>
           <P><B>modalità iniziale</B> (light o dark)</P>

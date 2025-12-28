@@ -7,15 +7,15 @@ import { ThemeProvider, NavBar, Page } from "ui";
 
 import Logo from "../assets/logo"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse } from '@fortawesome/free-solid-svg-icons'
+import Icon from "react-native-vector-icons/FontAwesome6";
+
 
 
 const NAV_ITEMS = [
-  { label: "Home", href: "/", icon: <FontAwesomeIcon icon={faHouse} /> },
-  { label: "Overview", href: "/getting-started", icon: <FontAwesomeIcon icon={faHouse} /> },
-  { label: "Docs", href: "/docs", icon: <FontAwesomeIcon icon={faHouse} /> },
-  { label: "Examples", href: "/docs999", icon: <FontAwesomeIcon icon={faHouse} /> },
+  { label: "Home", href: "/", icon: <Icon name="house" size={18} /> },
+  { label: "Overview", href: "/getting-started", icon: <Icon name="house" size={18} /> },
+  { label: "Docs", href: "/docs", icon: <Icon name="book" size={18} /> },
+  { label: "Examples", href: "/examples", icon: <Icon name="house" size={18} /> },
 ];
 
 export default function RootLayout() {

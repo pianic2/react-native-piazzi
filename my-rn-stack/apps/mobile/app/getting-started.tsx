@@ -43,7 +43,7 @@ export default function DocsIndex() {
       =============================== */}
       <Card>
         <TextGroup>
-          <Row>
+          <Row align="center">
             <Badge>1</Badge>
             <Heading level={2}>Requirements</Heading>
           </Row>
