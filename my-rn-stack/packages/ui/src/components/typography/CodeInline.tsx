@@ -12,7 +12,7 @@ export function CodeInline(props: PProps) {
 
   return (
       <Text
-        size={props.size}
+        size={props.size || "sm"}
         style={[
           {
             fontFamily: theme.typography.fontFamily.mono,
@@ -21,7 +21,7 @@ export function CodeInline(props: PProps) {
             borderWidth: 1,
             borderRadius: theme.radius.sm,
             paddingHorizontal: theme.space.sm,
-            paddingVertical: 0,
+            paddingVertical: 1,
             lineHeight:
               theme.typography.fontSize[props.size] *
               theme.typography.lineHeight.normal,

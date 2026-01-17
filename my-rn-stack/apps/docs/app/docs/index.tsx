@@ -38,6 +38,12 @@ export default function DocsIndex() {
         <Link href="/docs/tokens" variant="button">Tokens</Link>
         <Link href="/docs/theme" variant="button">Theming</Link>
         <Link href="/docs/components/typography" variant="button">Tipografia</Link>
+        <Link href="/docs/components/layout" variant="button">Layout</Link>
+        <Link href="/docs/components/surfaces" variant="button">Superfici</Link>
+        <Link href="/docs/components/feedback" variant="button">Feedback</Link>
+        <Link href="/docs/components/navigation" variant="button">Navigazione</Link>
+        <Link href="/docs/components/overlay" variant="button">Sovrapposizioni</Link>
+        <Link href="/docs/components/form" variant="button">Form</Link>
       </TextGroup>
 
     </Column>

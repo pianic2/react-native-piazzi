@@ -171,6 +171,10 @@ style={{ margin: 12 }}`}
           Tema di default
         </Link>
       </TextGroup>
+
+      <Row justify="flex-end">
+        <Link href="docs/components/typography" variant="button" size="lg">Tipografia</Link>
+      </Row>
     </Column>
   );
 }

@@ -5,7 +5,7 @@ import { Pressable, Text } from "react-native";
 import { LucideIcon } from "lucide-react-native";
 import { useTheme } from "../theme/useTheme";
 
-type Variant = "primary" | "ghost" | "danger" | "info";
+type Variant = "primary" | "secondary" | "ghost" | "danger" | "info";
 type Size = "xs" | "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -28,7 +28,7 @@ export function Button({
   const { theme, colors } = useTheme();
 
   const heightMap = {
-    xs: 28,
+    xs: 26,
     sm: 32,
     md: 40,
     lg: 48,
@@ -51,9 +51,11 @@ export function Button({
   const backgroundColor =
     variant === "primary"
       ? colors.primary
+      : variant === "secondary"
+      ? colors.secondary
       : variant === "danger"
       ? colors.error
-      : "transparent";
+      : "transparent"
 
   const contentColor =
     variant === "ghost"
@@ -63,10 +65,10 @@ export function Button({
   const borderColor =
     variant === "primary"
       ? colors.primary
+      : variant === "secondary"
+      ? colors.secondary
       : variant === "danger"
       ? colors.error
-      : variant === "ghost"
-      ? colors.textPrimary
       : colors.textInverted;
 
 
@@ -83,7 +85,7 @@ export function Button({
       style={({ pressed }) => ({
         minHeight: heightMap[size],
         paddingHorizontal: horizontalPadding[size],
-        paddingVertical: theme.space.md,
+        paddingVertical: theme.space[size],
         borderWidth: 2,
         borderColor: borderColor,
         borderRadius: theme.radius.md,

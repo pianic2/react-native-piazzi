@@ -4,3 +4,4 @@ import type { radius } from "./radius.base";
 import type { typography } from "./typography.base";
 import type { shadows } from "./shadows.base";
 import type { zIndex } from "./zIndex.base";
+import type { size } from "./size.base";

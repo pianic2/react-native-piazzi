@@ -1,12 +1,7 @@
 // ui/components/overlay/Popover.tsx
 
 import React, { useState } from "react";
-import {
-  Platform,
-  Pressable,
-  View,
-  LayoutRectangle,
-} from "react-native";
+import { Platform, Pressable, View } from "react-native";
 import { useTheme } from "../../theme/useTheme";
 import { Box } from "../layout/Box";
 
@@ -16,82 +11,78 @@ interface PopoverProps {
   renderTrigger: (args: { open: boolean; toggle: () => void }) => React.ReactNode;
   children: React.ReactNode;
   placement?: Placement;
+  gap?: keyof ReturnType<typeof useTheme>["theme"]["space"];
 }
 
 export function Popover({
   renderTrigger,
   children,
-  placement = "bottom",
+  placement = "top",
+  gap = "xs",
 }: PopoverProps) {
   const { theme, colors } = useTheme();
   const [open, setOpen] = useState(false);
-  const [rect, setRect] = useState<LayoutRectangle | null>(null);
+  const [anchorSize, setAnchorSize] = useState<{ width: number; height: number } | null>(null);
 
   const toggle = () => setOpen((v) => !v);
 
   if (Platform.OS !== "web") {
-    // Su mobile puoi usare BottomSheet o Modal
+    // Su mobile → BottomSheet / Modal
     return <>{renderTrigger({ open, toggle })}</>;
   }
 
-  const style = (() => {
-    if (!rect) return { opacity: 0 };
-    const gap = 8;
+  const popoverStyle = (() => {
+    if (!anchorSize) return { opacity: 0 };
 
     switch (placement) {
       case "bottom":
-        return { left: rect.x, top: rect.y + rect.height + gap };
+        return { top: anchorSize.height + theme.space[gap], left: 0 };
       case "top":
-        return { left: rect.x, top: rect.y - gap };
+        return { bottom: anchorSize.height + theme.space[gap], left: 0 };
       case "right":
-        return { left: rect.x + rect.width + gap, top: rect.y };
+        return { left: anchorSize.width + theme.space[gap], top: 0 };
       case "left":
-        return { left: rect.x - gap, top: rect.y };
+        return { right: anchorSize.width + theme.space[gap], top: 0 };
     }
   })();
 
   return (
-    <View style={{ alignSelf: "flex-start" }}>
+    <View style={{ alignSelf: "flex-start", position: "relative" }}>
+      {/* ANCHOR */}
       <View
-        onLayout={(e) => setRect(e.nativeEvent.layout)}
+        onLayout={(e) => {
+          const { width, height } = e.nativeEvent.layout;
+          setAnchorSize({ width, height });
+        }}
       >
         <Pressable onPress={toggle}>
           {renderTrigger({ open, toggle })}
         </Pressable>
       </View>
 
-      {open && rect && (
-        <Pressable
-          onPress={() => setOpen(false)}
+      {/* POPOVER */}
+      {open && anchorSize && (
+        <View
           style={{
-            position: "fixed" as any,
-            inset: 0,
-            backgroundColor: "transparent",
+            position: "absolute",
             zIndex: theme.zIndex.overlay,
+            ...popoverStyle,
           }}
         >
-          <View
+          <Box
+            bg="surface"
+            radius="md"
+            shadow="md"
+            padding="sm"
             style={{
-              position: "absolute",
-              ...style,
-              zIndex: theme.zIndex.dropdown,
+              borderWidth: 1,
+              borderColor: colors.border,
+              minWidth: 180,
             }}
           >
-            <Box
-              bg="surface"
-              radius="md"
-              shadow="md"
-              padding="sm"
-              style={{
-                borderWidth: 1,
-                borderColor: colors.border,
-                minWidth: 180,
-              }}
-            >
-              {children}
-            </Box>
-          </View>
-        </Pressable>
+            {children}
+          </Box>
+        </View>
       )}
     </View>
   );

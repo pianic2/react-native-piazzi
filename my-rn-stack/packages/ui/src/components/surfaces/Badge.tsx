@@ -10,7 +10,6 @@ type Variant = "primary" | "success" | "warning" | "danger" | "info";
 interface BadgeProps extends TextProps {
   children: React.ReactNode;
   size?: keyof ReturnType<typeof useTheme>["theme"]["typography"]["fontSize"];
-
   variant?: Variant;
 }
 

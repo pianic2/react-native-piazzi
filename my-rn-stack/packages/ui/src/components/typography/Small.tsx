@@ -1,8 +1,16 @@
-// ui/components/typography/Small.tsx
-
+import React from "react";
 import { Text } from "./Text";
-import { TextProps } from "react-native";
+import type { ComponentProps } from "react";
 
-export function Small(props: TextProps) {
-  return <Text size="sm" variant="muted" {...props} />;
+type PProps = ComponentProps<typeof Text>;
+
+export function Small(props: PProps) {
+  
+  return (
+    <Text
+      size="sm"
+      variant="muted"
+      {...props}
+    />
+  );
 }

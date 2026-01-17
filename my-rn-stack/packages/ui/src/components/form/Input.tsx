@@ -6,18 +6,25 @@ import {
   TextInput,
   TextInputProps,
 } from "react-native";
-import { LucideIcon } from "lucide-react-native";
+import { P } from "../typography/P";
+import { Small } from "../typography/Small";
 import { useTheme } from "../../theme/useTheme";
+import { Box, Row } from "../layout";
 
 interface InputProps extends TextInputProps {
+  label: string;
+  size?: "xs" | "sm" | "md" | "lg";
   error?: boolean;
   helperText?: string;
-  leftIcon?: LucideIcon;
-  rightIcon?: LucideIcon;
+  editable?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 export function Input({
+  size = "md",
   error = false,
+  helperText = "",
   editable = true,
   leftIcon: LeftIcon,
   rightIcon: RightIcon,
@@ -30,54 +37,76 @@ export function Input({
   const borderColor = error
     ? colors.error
     : focused
-    ? colors.primary
-    : colors.border;
+      ? colors.primary
+      : colors.border;
 
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        borderWidth: 1,
-        borderColor,
-        borderRadius: theme.radius.md,
-        backgroundColor: editable
-          ? colors.surface
-          : colors.disabledBg,
-        paddingHorizontal: theme.space.sm,
-      }}
-    >
-      {LeftIcon && (
-        <LeftIcon
-          size={18}
-          color={colors.textMuted}
-          style={{ marginRight: theme.space.xs }}
-        />
-      )}
+    <>
+      <P style={{ marginBottom: theme.space.xs }} weight="medium" size={size}>
+        <Box style={{ 
+          height: 10, 
+          width: 10, 
+          backgroundColor: colors.primary, 
+          borderRadius: 5, 
+        }}></Box>{" "}
+        {rest.label}
+      </P>
+      <Row
+        style={{
+          borderWidth: 1,
+          borderColor,
+          borderRadius: theme.radius.md,
+          backgroundColor: editable
+            ? colors.surface
+            : colors.disabledBg,
+          paddingHorizontal: theme.space[size],
+          minHeight: theme.size.height[size],
+          paddingVertical: 0,
 
-      <TextInput
-        {...rest}
-        editable={editable}
-        placeholderTextColor={colors.textMuted}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        style={[
-          {
-            flex: 1,
-            height: theme.components?.input?.height ?? 44,
-            color: colors.textPrimary,
-          },
-          style,
-        ]}
-      />
+        }}
+        align="flex-start"
+        gap={size}
+      >
+        {LeftIcon && (
+          <Box style={{ flexDirection: "row", alignItems: "center", height: theme.size.height[size] - 2 }}>
+            {LeftIcon}
+          </Box>
+        )}
 
-      {RightIcon && (
-        <RightIcon
-          size={18}
-          color={colors.textMuted}
-          style={{ marginLeft: theme.space.xs }}
+        {/* fare in modo che quando seFocused(True) allora il Textinput non si evidenzi  */}
+        <TextInput
+          {...rest}
+          editable={editable}
+          placeholderTextColor={colors.textMuted}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          style={[
+            {
+              flex: 1,
+              color: colors.textPrimary,
+              height: theme.size.height[size] - 2,
+              paddingVertical: theme.space["md"] - 2.5
+            },
+            style,
+          ]}
         />
+        {RightIcon && (
+          <Box style={{ flexDirection: "row", alignItems: "center", height: theme.size.height[size] - 2 }}>
+            {RightIcon}
+          </Box>
+        )}
+      </Row>
+
+      {helperText && (
+        <Small
+          style={{
+            marginTop: theme.space.xs,
+            color: error ? colors.error : colors.textMuted,
+          }}
+        >
+          {helperText}
+        </Small>
       )}
-    </View>
+    </>
   );
 }

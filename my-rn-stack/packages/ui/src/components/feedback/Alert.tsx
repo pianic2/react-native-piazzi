@@ -6,26 +6,27 @@ import { Text } from "../typography/Text";
 import { Button } from "../Button";
 import { useTheme } from "../../theme/useTheme";
 
-type Variant = "info" | "success" | "warning" | "error";
+type Variant = "primary" | "info" | "success" | "warning" | "error";
 
 interface AlertProps {
   title?: string;
-  message: string;
   variant?: Variant;
+  message?: string;
   actionLabel?: string;
   onAction?: () => void;
 }
 
 export function Alert({
   title,
-  message,
   variant = "info",
+  message,
   actionLabel,
   onAction,
 }: AlertProps) {
   const { theme, colors } = useTheme();
 
   const bgMap: Record<Variant, string> = {
+    primary: colors.primary,
     info: colors.info,
     success: colors.success,
     warning: colors.warning,
@@ -47,9 +48,12 @@ export function Alert({
         </Text>
       )}
 
+      {message && (
       <Text style={{ color: colors.textInverted }} align="left">
         {message}
       </Text>
+      )}
+
 
       {actionLabel && onAction && (
         <Button

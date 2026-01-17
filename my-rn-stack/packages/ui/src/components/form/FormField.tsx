@@ -130,10 +130,10 @@ export function FormField({
     <View style={[styles.container, style]}>
       {/* LABEL */}
       {label && (
-        <P style={[styles.label, { color: colors.text }]}>
+        <P style={[styles.label, { color: colors.textPrimary }]}>
           <B>{label}</B>
           {required && (
-            <Small style={{ color: colors.danger.bg }}> *</Small>
+            <Small style={{ color: colors.error }}> *</Small>
           )}
         </P>
       )}
@@ -146,14 +146,14 @@ export function FormField({
         <Small
           // per linking con aria-describedby
           nativeID={errorId}
-          style={[styles.error, { color: colors.danger.bg }]}
+          style={[styles.error, { color: colors.error }]}
         >
           {errorText}
         </Small>
       ) : helperText ? (
         <Small
           nativeID={helperId}
-          style={[styles.helper, { color: colors.text + "99" }]}
+          style={[styles.helper, { color: colors.textPrimary + "99" }]}
         >
           {helperText}
         </Small>

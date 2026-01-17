@@ -34,7 +34,7 @@ export function BottomBar({ maxItems = 5 }: { maxItems?: 3 | 4 | 5 }) {
         paddingBottom: theme.space.xs,
 
         // layering (se hai zIndex tokens, usa quelli)
-        zIndex: theme.zIndex?.navigation ?? 100,
+        zIndex: theme.zIndex?.sticky ?? 100,
         height: 60,
       }}
     >

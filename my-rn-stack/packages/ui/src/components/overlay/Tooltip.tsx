@@ -1,12 +1,7 @@
 // ui/components/overlay/Tooltip.tsx
 
 import React, { useRef, useState } from "react";
-import {
-  Platform,
-  Pressable,
-  View,
-  LayoutRectangle,
-} from "react-native";
+import { Platform, Pressable, View } from "react-native";
 import { useTheme } from "../../theme/useTheme";
 import { Text } from "../typography/Text";
 
@@ -22,63 +17,73 @@ interface TooltipProps {
 export function Tooltip({
   content,
   placement = "top",
-  delay = 450,
+  delay = 1000,
   children,
 }: TooltipProps) {
   const { theme, colors } = useTheme();
   const timer = useRef<any>(null);
+
   const [open, setOpen] = useState(false);
-  const [rect, setRect] = useState<LayoutRectangle | null>(null);
+  const [anchorSize, setAnchorSize] =
+    useState<{ width: number; height: number } | null>(null);
 
   if (Platform.OS !== "web") return <>{children}</>;
 
   function show() {
-    timer.current = setTimeout(() => setOpen(true), delay);
+    timer.current = setOpen(true)
   }
 
   function hide() {
-    if (timer.current) clearTimeout(timer.current);
+    if (timer.current) setTimeout(() => clearTimeout(timer.current), delay);
     setOpen(false);
   }
 
-  const tooltipStyle = (() => {
-    if (!rect) return { opacity: 0 };
+  const gap = 50;
 
-    const gap = 8;
+  const tooltipStyle = (() => {
+    if (!anchorSize) return { top: 50, left: 50 };
+
     switch (placement) {
-      case "top":
-        return { left: rect.x, top: rect.y - gap };
       case "bottom":
-        return { left: rect.x, top: rect.y + rect.height + gap };
-      case "left":
-        return { left: rect.x - gap, top: rect.y };
+        return { top: anchorSize.height + theme.space[gap], left: 0 };
+      case "top":
+        return { bottom: anchorSize.height + theme.space[gap], left: 0 };
       case "right":
-        return { left: rect.x + rect.width + gap, top: rect.y };
+        return { left: anchorSize.width + theme.space[gap], top: 0 };
+      case "left":
+        return { right: anchorSize.width + theme.space[gap], top: 0 };
     }
   })();
 
   return (
-    <Pressable
-      onHoverIn={show}
-      onHoverOut={hide}
-      onPressIn={show}
-      onPressOut={hide}
-      onLayout={(e) => setRect(e.nativeEvent.layout)}
-      style={{ alignSelf: "flex-start" }}
-    >
-      {children}
+    <View style={{ alignSelf: "flex-start", position: "relative" }}>
+      {/* ANCHOR */}
+      <Pressable
+        onHoverIn={show}
+        onHoverOut={hide}
+        onPressIn={show}
+        onPressOut={hide}
+        onLayout={(e) => {
+          const { width, height } = e.nativeEvent.layout;
+          console.log(e.nativeEvent.layout);
+          setAnchorSize({ width: width + 10, height: height + 10 });
+        }}
+      >
+        {children}
+      </Pressable>
 
-      {open && rect && (
+      {/* TOOLTIP */}
+      {open && anchorSize && (
         <View
           style={{
             position: "absolute",
-            ...tooltipStyle,
+            zIndex: theme.zIndex.tooltip,
             backgroundColor: colors.textPrimary,
             paddingHorizontal: theme.space.sm,
             paddingVertical: 6,
             borderRadius: theme.radius.sm,
-            zIndex: theme.zIndex.tooltip,
             maxWidth: 260,
+            ...tooltipStyle,
           }}
         >
           <Text size="sm" style={{ color: colors.textInverted }}>
@@ -86,6 +91,6 @@ export function Tooltip({
           </Text>
         </View>
       )}
-    </Pressable>
+    </View>
   );
 }

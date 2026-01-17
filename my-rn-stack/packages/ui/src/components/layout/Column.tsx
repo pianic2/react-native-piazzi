@@ -16,9 +16,9 @@ interface ColumnProps extends ViewProps {
 
 export function Column({
   gap = "xl",
-  flex = 1,
   align = "flex-start",
   justify = "flex-start",
+  flex = 1,
   style,
   children,
   ...rest

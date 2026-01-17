@@ -5,6 +5,7 @@ import { radius } from "../tokens/radius.base";
 import { typography } from "../tokens/typography.base";
 import { shadows } from "../tokens/shadows.base";
 import { zIndex } from "../tokens/zIndex.base";
+import { size } from "../tokens/size.base";
 import { resolveColors } from "../tokens/colors.base";
 import type { ThemeMode } from "./types";
 
@@ -19,19 +20,16 @@ export function createBaseTheme(mode: ThemeMode) {
     typography,
     shadows,
     zIndex,
+    size,
 
     components: {
       button: {
-        height: {
-          sm: 36,
-          md: 44,
-          lg: 52,
-        },
+        height: size.height,
         radius: radius.md,
       },
 
       input: {
-        height: 44,
+        height: size.height,
         radius: radius.sm,
       },
 

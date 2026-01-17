@@ -2,17 +2,17 @@ import React from "react";
 import { View, StyleSheet, ViewStyle } from "react-native";
 import { useTheme } from "../../theme/useTheme";
 
+type SpaceKey = keyof ReturnType<typeof useTheme>["theme"]["space"];
+
 interface DividerProps {
-  color?: string;       // override colore linea
   thickness?: number;   // spessore
-  spacing?: number;
+  spacing?: SpaceKey;
   style?: ViewStyle | ViewStyle[];
 }
 
 export function Divider({
-  color,
-  thickness = 2,
-  spacing = 12,
+  thickness = 1,
+  spacing = "none",
   style,
 }: DividerProps) {
   const { colors } = useTheme();
@@ -22,8 +22,8 @@ export function Divider({
       style={[
         {
           height: thickness,
-          backgroundColor: color || colors.text + "33", // 20% opacity
-          spacing,
+          backgroundColor: colors.divider, // 20% opacity
+          marginVertical: useTheme().theme.space[spacing],
           width: "100%",
         },
         style,

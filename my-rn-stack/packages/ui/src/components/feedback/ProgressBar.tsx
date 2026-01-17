@@ -4,16 +4,19 @@ import React from "react";
 import { View } from "react-native";
 import { useTheme } from "../../theme/useTheme";
 
+type Variant = "primary" | "info" | "success" | "warning" | "error";
+
 interface ProgressBarProps {
-  value?: number; // 0–100
+  progress?: number; // 0–100
+  color?: Variant;
 }
 
-export function ProgressBar({ value }: ProgressBarProps) {
+export function ProgressBar({ progress, color }: ProgressBarProps) {
   const { theme, colors } = useTheme();
 
   const width =
-    value !== undefined
-      ? `${Math.min(Math.max(value, 0), 100)}%`
+    progress !== undefined
+      ? `${Math.min(Math.max(progress, 0), 100)}%`
       : "30%";
 
   return (
@@ -27,9 +30,9 @@ export function ProgressBar({ value }: ProgressBarProps) {
     >
       <View
         style={{
-          width,
+          // width: width || "30%",
           height: "100%",
-          backgroundColor: colors.primary,
+          backgroundColor: color ? colors[color] : colors.primary,
         }}
       />
     </View>

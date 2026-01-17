@@ -6,19 +6,19 @@ export const fontFamily = {
 } as const;
 
 export const fontSize = {
-  xs: 12,
-  sm: 14,
-  md: 16,
-  lg: 18,
-  xl: 22,
-  xxl: 30,
+  xs: 11,
+  sm: 12,
+  md: 14,
+  lg: 16,
+  xl: 20,
+  xxl: 28,
   xxxl: 42,
 } as const;
 
 export const lineHeight = {
-  tight: 1,
-  normal: 1.1,
-  relaxed: 1.3,
+  tight: 1.1,
+  normal: 1.3,
+  relaxed: 1.5,
 } as const;
 
 export const fontWeight = {

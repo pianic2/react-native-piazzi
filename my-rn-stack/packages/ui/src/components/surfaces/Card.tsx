@@ -14,6 +14,7 @@ interface CardProps {
   style?: StyleProp<ViewStyle>;
   bgColor?: string;
   radius?: number;
+  margin?: keyof ReturnType<typeof useTheme>["theme"]["space"];
   padding?: keyof ReturnType<typeof useTheme>["theme"]["space"];
   variant?: "default" | "elevated" | "outline";
   shadow?: Shadow;
@@ -24,6 +25,7 @@ export function Card({
   style,
   bgColor,
   radius = 14,
+  margin = "none",
   padding = "md",
   variant = "default",
   shadow,
@@ -49,6 +51,7 @@ export function Card({
         {
           backgroundColor: cardBackground,
           borderRadius: radius,
+          margin: theme.space[margin],
           padding: theme.space[padding],
         },
 

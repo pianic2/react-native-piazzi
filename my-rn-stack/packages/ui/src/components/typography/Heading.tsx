@@ -1,23 +1,20 @@
 // ui/components/typography/Heading.tsx
 
-import React from "react";
-import { TextProps } from "react-native";
 import { Text } from "./Text";
 import { useTheme } from "../../theme/useTheme";
+import type { ComponentProps } from "react";
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6;
+type TextProps = ComponentProps<typeof Text>;
 
 interface HeadingProps extends TextProps {
-  children: React.ReactNode;
-  align?: "left" | "center" | "right" | "justify";
   level?: Level;
 }
 
 export function Heading({
-  level = 2,
+  level = 1,
   style,
   children,
-  align = "left",
   ...rest
 }: HeadingProps) {
   const { theme } = useTheme();
@@ -37,7 +34,6 @@ export function Heading({
       {...rest}
       size={sizeMap[level]}
       weight="bold"
-      align={align}
       style={[
         style,
       ]}
