@@ -9,11 +9,11 @@ type TextProps = ComponentProps<typeof Text>;
 
 interface HeadingProps extends TextProps {
   level?: Level;
+  children: string
 }
 
 export function Heading({
   level = 1,
-  style,
   children,
   ...rest
 }: HeadingProps) {
@@ -34,9 +34,6 @@ export function Heading({
       {...rest}
       size={sizeMap[level]}
       weight="bold"
-      style={[
-        style,
-      ]}
     >
       {children}
     </Text>

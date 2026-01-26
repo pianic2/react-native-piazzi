@@ -1,15 +1,10 @@
-// apps/mobile/app/_layout.tsx
-
 import React from "react";
-import { Slot } from "expo-router";
+import { Slot, useRouter, usePathname } from "expo-router";
 
 import { ThemeProvider, ToastProvider, NavBar, Page } from "ui";
 
-import Logo from "../assets/logo"
-
+import Logo from "../assets/logo";
 import Icon from "react-native-vector-icons/FontAwesome6";
-
-
 
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: <Icon name="house" size={18} /> },
@@ -19,19 +14,25 @@ const NAV_ITEMS = [
 ];
 
 export default function RootLayout() {
-  
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const navigate = (href: string) => {
+    if (href !== pathname) router.push(href as any);
+  };
+
   return (
     <ThemeProvider withScroll={false}>
       <ToastProvider>
-
         <Page>
-          {/* Contenuto delle route */}
           <Slot />
         </Page>
 
         <NavBar
-          logo={<Logo size={30}/>}
+          logo={<Logo size={30} />}
           items={NAV_ITEMS}
+          pathname={pathname}
+          navigate={navigate}
           bottomMaxItems={4}
           sidebarWidth={260}
           layout="auto"

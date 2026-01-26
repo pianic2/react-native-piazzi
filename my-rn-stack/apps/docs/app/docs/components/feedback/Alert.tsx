@@ -17,7 +17,6 @@ import {
   Text,
   Badge,
   Alert
-
 } from "ui";
 
 import { Dimensions } from 'react-native';

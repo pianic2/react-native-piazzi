@@ -1,5 +1,3 @@
-// ui/components/navigation/Link.tsx
-
 import React from "react";
 import {
   Pressable,
@@ -9,7 +7,6 @@ import {
   Platform,
   Linking,
 } from "react-native";
-import { router } from "expo-router";
 import { useTheme } from "../../theme/useTheme";
 import { useOptionalNav } from "./NavContext";
 
@@ -24,11 +21,9 @@ export interface LinkProps {
   size?: LinkSize;
   underline?: boolean;
 
-  // Styles
   containerStyle?: ViewStyle | ViewStyle[];
   style?: TextStyle | TextStyle[];
 
-  // Active handling
   activeStyle?: TextStyle | TextStyle[];
   activeContainerStyle?: ViewStyle | ViewStyle[];
   exact?: boolean;
@@ -59,21 +54,18 @@ export function Link({
       : pathname.startsWith(href)
     : false;
 
-  const heightMap = {
-    sm: 32,
-    md: 40,
-    lg: 48,
-  };
-
+  const heightMap = { sm: 32, md: 40, lg: 48 };
   const paddingXMap = {
     sm: theme.space.sm,
     md: theme.space.md,
     lg: theme.space.lg,
   };
 
-  function navigate() {
+  function doNavigate() {
+    // 1) Se l’app ha fornito NavProvider, usalo sempre
     if (nav?.navigate) return nav.navigate(href);
 
+    // 2) Link esterni (sempre safe)
     if (/^https?:\/\//i.test(href)) {
       if (Platform.OS === "web") {
         window.open(href, "_blank", "noopener,noreferrer");
@@ -83,18 +75,30 @@ export function Link({
       return;
     }
 
-    router.push(href as any);
+    // 3) Fallback web per link interni (senza router)
+    if (Platform.OS === "web") {
+      window.location.assign(href);
+      return;
+    }
+
+    // 4) Native senza NavProvider: non possiamo navigare
+    if (__DEV__) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[ui/Link] Nessun NavProvider trovato: impossibile navigare verso "${href}" su native.`
+      );
+    }
   }
 
   return (
     <Pressable
       onPress={() => {
         onPress?.();
-        navigate();
+        doNavigate();
       }}
       style={({ pressed }) => [
         variant === "button" && {
-          minHeight: heightMap[size], // 🔒 stesso contratto di Button
+          minHeight: heightMap[size],
           paddingHorizontal: paddingXMap[size],
           borderRadius: theme.radius.md,
           alignItems: "center",
@@ -102,9 +106,7 @@ export function Link({
           backgroundColor: colors.primary,
           opacity: pressed ? 0.85 : 1,
         },
-
         variant === "text" && pressed && { opacity: 0.7 },
-
         containerStyle,
         isActive && activeContainerStyle,
       ]}
@@ -121,7 +123,6 @@ export function Link({
                 color: colors.primary,
                 textDecorationLine: underline ? "underline" : "none",
               },
-
           style,
           isActive && activeStyle,
         ]}

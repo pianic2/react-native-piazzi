@@ -6,13 +6,14 @@ import { typography } from "../tokens/typography.base";
 import { shadows } from "../tokens/shadows.base";
 import { zIndex } from "../tokens/zIndex.base";
 import { size } from "../tokens/size.base";
-import { resolveColors } from "../tokens/colors.base";
+import { lightColors } from "../tokens/colors.base";
 import type { ThemeMode } from "./types";
+
 
 export function createBaseTheme(mode: ThemeMode) {
   return {
     mode,
-    colors: resolveColors(mode),
+    colors: lightColors,
 
     spacing,
     space,
@@ -22,24 +23,23 @@ export function createBaseTheme(mode: ThemeMode) {
     zIndex,
     size,
 
-    components: {
-      button: {
-        height: size.height,
-        radius: radius.md,
-      },
-
-      input: {
-        height: size.height,
-        radius: radius.sm,
-      },
-
-      card: {
-        radius: radius.lg,
-        shadow: shadows.sm,
-        padding: space.md,
-      },
-    },
   } as const;
 }
 
 export type Theme = ReturnType<typeof createBaseTheme>;
+
+export const defaultTheme: Theme = {
+  mode: 'light',
+
+  colors: lightColors,
+
+  spacing,
+  space,
+  radius,
+  typography,
+  shadows,
+  zIndex,
+  size,
+};
+
+

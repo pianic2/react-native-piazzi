@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Platform } from "react-native";
-import { useRouter, usePathname } from "expo-router";
+import { Platform } from "react-native";
 import { NavProvider, NavItem } from "./NavContext";
 import { TopBar } from "./TopBar";
 import { BottomBar } from "./BottomBar";
@@ -9,46 +8,33 @@ import { SideBar } from "./SideBar";
 export interface NavBarProps {
   items?: NavItem[];
   logo?: React.ReactNode;
+
+  // IMPORTANT: l’app fornisce lo stato di routing
+  pathname: string;
+  navigate: (href: string) => void;
+
   layout?: "auto" | "top" | "bottom" | "sidebar";
   bottomMaxItems?: number;
   sidebarWidth?: number;
 }
 
 export function NavBar({
-  items,
+  items = [],
   logo,
-
+  pathname,
+  navigate,
   layout = "auto",
   bottomMaxItems = 5,
   sidebarWidth = 260,
 }: NavBarProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const navigate = (href: string) => {
-    if (href !== pathname) {
-      router.push(href as any);
-    }
-  };
-
-
   const finalLayout =
-    layout === "auto"
-      ? Platform.OS === "web"
-        ? "top"
-        : "bottom"
-      : layout;
+    layout === "auto" ? (Platform.OS === "web" ? "top" : "bottom") : layout;
 
   return (
-    <NavProvider
-      items={items}
-      logo={logo}
-      navigate={navigate}
-      pathname={pathname}
-      >
+    <NavProvider items={items} logo={logo} navigate={navigate} pathname={pathname}>
       {finalLayout === "top" && <TopBar />}
-      {finalLayout === "bottom" && (<BottomBar maxItems={bottomMaxItems} />)}
-      {finalLayout === "sidebar" && (<SideBar width={sidebarWidth} />)}
+      {finalLayout === "bottom" && <BottomBar />}
+      {finalLayout === "sidebar" && <SideBar/>}
     </NavProvider>
   );
 }

@@ -51,7 +51,6 @@ export function TopBar({ title, leftSlot, centerSlot, rightSlot }: TopBarProps) 
               const active = pathname === it.href;
               return (
                 <Link
-                  key={it.href}
                   href={it.href}
                   underline={false}
                   activeStyle={{ fontWeight: theme.typography.fontWeight.bold, color: colors.primary }}

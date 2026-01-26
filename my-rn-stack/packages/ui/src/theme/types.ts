@@ -6,6 +6,7 @@ import type { radius } from "../tokens/radius.base";
 import type { typography } from "../tokens/typography.base";
 import type { shadows } from "../tokens/shadows.base";
 import type { zIndex } from "../tokens/zIndex.base";
+import { size } from "../tokens/size.base";
 
 export interface Theme {
   colors: Colors;
@@ -17,6 +18,7 @@ export interface Theme {
   typography: typeof typography;
   shadows: typeof shadows;
   zIndex: typeof zIndex;
+  size: typeof size;
 
   components?: {
     button?: {

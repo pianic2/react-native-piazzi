@@ -13,6 +13,8 @@ import {
   Animated,
   Platform,
 } from "react-native";
+
+const AnimatedView = Animated.createAnimatedComponent(View);
 import { Alert } from "./Alert";
 import { useTheme } from "../../theme/useTheme";
 
@@ -234,19 +236,18 @@ export function ToastProvider({
           };
 
           const content = (
-            <Animated.View style={animatedStyle}>
+            <View style={animatedStyle}>
               <Alert
                 title={t.title}
                 message={t.message}
                 variant={t.variant}
               />
-            </Animated.View>
+            </View>
           );
 
           if (!dismissOnPress) {
             return (
               <Hoverable
-                key={t.id}
                 onHoverIn={() =>
                   pauseOnHover && clearTimer(t.id)
                 }
@@ -261,7 +262,6 @@ export function ToastProvider({
 
           return (
             <Hoverable
-              key={t.id}
               onHoverIn={() =>
                 pauseOnHover && clearTimer(t.id)
               }

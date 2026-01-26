@@ -16,7 +16,7 @@ function deepMerge<T>(target: T, source?: Partial<T>): T {
       typeof value === "object" &&
       !Array.isArray(value)
     ) {
-      output[key] = deepMerge(output[key] ?? {}, value);
+      output[key] = deepMerge(output[key], value);
     } else if (value !== undefined) {
       output[key] = value;
     }

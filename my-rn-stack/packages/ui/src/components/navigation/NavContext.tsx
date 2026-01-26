@@ -1,7 +1,6 @@
 // ui/components/navigation/NavContext.tsx
 
 import React, { createContext, useContext, useMemo } from "react";
-import { usePathname as useExpoPathname } from "expo-router";
 
 export interface NavItem {
   label: string;
@@ -22,16 +21,16 @@ const NavContext = createContext<NavContextValue | null>(null);
 export function NavProvider({
   items,
   logo,
+  pathname,
   navigate,
   children,
 }: {
-  logo: React.ReactNode;
   items: NavItem[];
+  logo?: React.ReactNode;
+  pathname: string;
   navigate: (href: string) => void;
   children: React.ReactNode;
 }) {
-  const pathname = useExpoPathname();
-
   const value = useMemo(
     () => ({
       logo,
@@ -42,11 +41,7 @@ export function NavProvider({
     [logo, items, pathname, navigate]
   );
 
-  return (
-    <NavContext.Provider value={value}>
-      {children}
-    </NavContext.Provider>
-  );
+  return <NavContext.Provider value={value}>{children}</NavContext.Provider>;
 }
 
 /* =========================
@@ -56,9 +51,7 @@ export function NavProvider({
 export function useNav() {
   const ctx = useContext(NavContext);
   if (!ctx) {
-    throw new Error(
-      "useNav must be used inside <NavProvider>"
-    );
+    throw new Error("useNav must be used inside <NavProvider>");
   }
   return ctx;
 }

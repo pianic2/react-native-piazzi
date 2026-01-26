@@ -26,9 +26,6 @@ export * from "./auth/types";
 export * from "./auth/AuthProvider";
 export * from "./auth/useAuth";
 
-export * from "./storage/expoSecureStore";
-export * from "./storage/localStorage";
-
 export * from "./api/djangoSimpleJwt";
 
 // UI opzionali
@@ -55,3 +52,6 @@ export * from "./hooks/index";
 export * from "./utils/index";
 // Surfaces
 export * from "./components/surfaces";
+
+//storage
+export * from "./storage/index";

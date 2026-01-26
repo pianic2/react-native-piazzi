@@ -1,3 +1,5 @@
+import { TokenStorage } from "../storage/tokenStorage";
+
 export interface TokenPair {
   access: string;
   refresh: string;
@@ -7,12 +9,6 @@ export interface AuthUser {
   id: string | number;
   email?: string;
   [key: string]: any;
-}
-
-export interface TokenStorage {
-  getTokens(): Promise<TokenPair | null>;
-  saveTokens(tokens: TokenPair): Promise<void>;
-  clearTokens(): Promise<void>;
 }
 
 export interface AuthApiConfig {

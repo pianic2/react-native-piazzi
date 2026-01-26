@@ -1,27 +1,13 @@
 {
   "name": "my-rn-stack",
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
-  },
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {},
   "devDependencies": {
-    "msw": "^2.12.3",
-    "prettier": "^3.6.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-native-bundle-visualizer": "^3.1.3",
-    "react-native-web": "0.21.2",
-    "turbo": "^2.6.1",
-    "typescript": "5.9.2"
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
   },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "npm@11.6.4",
+  "private": true,
   "workspaces": [
     "apps/*",
     "packages/*"

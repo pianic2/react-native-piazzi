@@ -1,18 +1,17 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "noEmit": false,
-    "outDir": "dist",
     "rootDir": "src",
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "outDir": "dist",
+
     "jsx": "react-jsx",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+
     "declaration": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "noEmit": false
   },
   "include": ["src"]
 }

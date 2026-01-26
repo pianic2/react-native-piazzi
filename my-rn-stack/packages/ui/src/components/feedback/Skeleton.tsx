@@ -38,7 +38,7 @@ export function Skeleton({
   }, [opacity]);
 
   return (
-    <Animated.View
+    <View
       style={{
         // width,
         height,
